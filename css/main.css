@@ -44,7 +44,8 @@ body {
 .headPhoto {
     width: 8rem;
     height: 8rem;
-    background: url(http://startpage.zhuanjie.ltd/img/logo.jpg) no-repeat;
+    /* 修改头像url指向 */
+    background: url(https://startpage.zhuanjie.ltd/img/headimg.png) no-repeat;
     background-size: cover;
     border-radius: 50%;
     position: relative;

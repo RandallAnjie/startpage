@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport"
+		content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+	<title>转接Home</title>
+	<meta name="description"
+		content="转接的个人主页">
+	<meta name="keywords" content="转接">
+	<link rel="stylesheet" type="text/css" href="./css/FiraCode.css">
+	<link rel="stylesheet" type="text/css" href="./css/main.css">
+	<link rel="icon" href="./favicon.ico">
+	<script type="text/javascript" src="jquery-1.9.1.min.js"></script>
+
+	<!-- 一言 -->
+	<script>
+		var xhr = new XMLHttpRequest();
+		xhr.open('get', 'https://v1.hitokoto.cn');
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				var data = JSON.parse(xhr.responseText);
+				var hitokoto = document.getElementById('hitokoto_text');
+				hitokoto.innerText = data.hitokoto+" —— "+data.from;
+			}
+		}
+		xhr.send();
+	</script>
+
+	<!-- 看板娘 -->
+	<script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+	<script>
+		L2Dwidget.init({
+			"model": {
+				jsonPath: "https://unpkg.com/live2d-widget-model-koharu@1.0.5/assets/koharu.model.json",
+				"scale": 1
+			},
+			"display": {
+				"position": "right", //看板娘的表现位置
+				"width": 75,  //小萝莉的宽度
+				"height": 150, //小萝莉的高度
+				"hOffset": 0,
+				"vOffset": -40
+			},
+			"mobile": {
+				"show": true,
+				"scale": 0.5
+			},
+			"react": {
+				"opacityDefault": 0.7,
+				"opacityOnHover": 0.2
+			}
+		});
+	</script>
+	<!-- 首先导入jq插件 -->
+	<script src="https://startpage.zhuanjie.ltd/jquery-1.9.1.min.js"></script>
+
+	<script type="text/javascript">
+	 /* 鼠标点击特效 */
+ 
+		jQuery(function () {
+			$("html").click(function(e) {
+				var a_idx = Math.floor((Math.random() * 26));
+				var a = new Array(
+				"乐观", "❤", "积极", "向上", "自由", "正能量", "(*^▽^*)", "元气满满", "开心", "快乐",
+				 "善良", "可爱", "暴富", "暴瘦", "❤","富强", "民主", "文明", "和谐", "自由", "平等",
+				 "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+				var color1 = Math.floor((Math.random() * 255));
+				var color2 = Math.floor((Math.random() * 255));
+				var color3 = Math.floor((Math.random() * 255));
+				var $i = $("<span />").text(a[a_idx]);
+				a_idx = (a_idx + 1) % a.length;
+				var x = e.pageX,
+					y = e.pageY;
+				$i.css({
+					"z-index": 9999999999999 ,
+					"top": y - 20,
+					"left": x,
+					"position": "absolute",
+					"font-family":"mmm",
+					"fontSize": 20,
+					"font-weight": "bold",
+					"color": "rgb("+color1+","+color2+","+color3+")",
+					"-webkit-user-select":"none",
+					"-moz-user-select":"none",
+					"-ms-user-select":"none",
+					"user-select":"none",
+				});
+				$("body").append($i);
+				$i.animate({
+					"top": y - 200,
+					"opacity": 0
+					},
+					1000,
+					function() {
+						$i.remove();
+				});
+			});
+		});
+	</script>
+	<!--<link rel="stylesheet" href="https://pyscript.net/alpha/pyscript.css" />-->
+	<!--<script defer src="https://pyscript.net/alpha/pyscript.js"></script>-->
+	<!--<link rel="stylesheet" href="css/pyscript.css"/>-->
+	<!--<script defer src="js/pyscript.js"></script>-->
+	<!--<script src="js/pyodide.js"></script>-->
+</head>
+
+<body>
+	<div id="box">
+		<!-- 个人资料卡片 -->
+		<div class="meBox">
+			<!-- 头像 -->
+			<div class="headPhoto"></div>
+			<!-- 介绍 -->
+			<div class="meBox-title">
+				<p>I'm Randall</p>
+				<div class="fg"></div>
+			</div>
+			<div class="meBox-text">
+			    <br />
+				<p>转接</p>
+				<br />
+				<p>言多必失，谨言慎行</p>
+				<br />
+				
+<!--				<py-script>-->
+<!--import js-->
+<!--import pyodide_js-->
+<!--import pyodide-->
+<!--print("此网页已插入python代码")-->
+<!--url = "https://startpage.zhuanjie.ltd/json/ToKnow.txt"-->
+<!--print(url)-->
+<!--pyodide.open_url(url)-->
+<!--				</py-script>-->
+			</div>
+			<!-- 两个按钮 -->
+			<div class="meBox-Button">
+				<a href="https://blog.zhuanjie.ltd/">博客</a>
+				<!-- http://randallblog.vaiwan.com/ -->
+				<!-- http://blog.zhuanjie.ltd:8088/ -->
+				<!-- href="http://randall_seafile.vaiwan.cn/" -->
+				<!-- <a>网盘(维护中)</a> -->
+				<!-- href="http://randallgitlab.vaiwan.com/Randall" -->
+				<a href="https://dash.randallanjie.uk/">服务器监控</a>
+			</div>
+		</div>
+
+		<!-- 伪终端介绍 -->
+		<div id="cmdBox">
+			<!-- 第一个终端 -->
+			<div class="cmd">
+				<!-- 三个按钮 -->
+				<div class="click">
+					<div class="red"></div>
+					<div class="yellow"></div>
+					<div class="green"></div>
+				</div>
+				<!-- 顶部标题 -->
+				<div class="title">
+					<span>简介 - bash</span>
+				</div>
+				<!-- 终端内文字 -->
+				<div class="cmdText">
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">./weather.sh</span>
+					<br />
+					<!-- iframe标签直接引用天气api -->
+					<iframe scrolling="no" src="https://tianqiapi.com/api.php?style=tb&skin=pitaya" frameborder="0"
+						width="578" height="20" allowtransparency="true"></iframe>
+					
+					<!-- 一言部分 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">cat ./oneword.txt</span>
+					<p id="hitokoto"><a id="hitokoto_text" style="color: rgb(88, 89, 92)">人生久远，何必在乎一时悲欢 loading...</a></p>
+					
+					<!-- 服务器说明-由于不在服务器上搭建此网站，固已废弃 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">uname -a</span>
+					<p>Linux machcreator 5.13.0-39-generic #44~20.04.1-Ubuntu SMP Thu Mar 24 16:43:35 UTC 2022 x86_64 x86_64 x86_64 GNU/Linux</p>
+					
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">cat ./aboutme.txt</span>
+					<p>我是一名来自北京印刷学院计算机专业的大学生。如有需要，请联系：</p>
+					<p><a href = "https://qm.qq.com/cgi-bin/qm/qr?k=ITvF6tqBrwg3lio5zPjPt3Ahx--Win5F&noverify=0" style="color: rgb(88, 89, 92);;text-decoration: none;">QQ：2227535604</a></p>
+					<p><a href = "mailto:2227535604@qq.com" style="color: rgb(88, 89, 92);text-decoration: none;">邮箱：2227535604@qq.com</a></p>
+					
+					<!-- 虚拟组网-已废弃（现已有的异地组网策略网速都嘎嘎慢） -->
+					<!-- <span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">cat ./IP.txt</span>
+					<p>虚拟局域网内网设备ip</p>
+					<p>Mi11            10.144.33.38</p>
+					<p>Ipad            10.144.224.129</p>
+					<p>Windows         10.144.121.29</p>
+					<p>Ubuntu          10.144.234.59</p>
+					<p>Win10Server     10.144.245.174</p> -->
+					
+					<!-- 随随便便说一点凑字数 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">cat ./redame.md</span>
+					<p>致敬过去</p>
+					<p>感受青春</p>
+					<p>憧憬未来</p>
+					<br />
+					<p>人生中的风华雪月，良辰美景</p>
+					<p>皆非有意便能为之</p>
+					<br />
+					<p>旅人心怀热忱，徐步山海</p>
+					<p>而它们恰巧于你奔赴而来</p>
+					<p>携手十里,共赏花开</p>
+					<br />
+					<p>倘若低头锁目，背对人间</p>
+					<p>十里桃花沐君而过</p>
+					<p>又怎能与君有一袖之缘</p>
+					<br />
+					<p>保持热爱，奔赴山海</p>
+					<p>以最饱满的状态</p>
+					<p>去遇见生命中最绚烂的精彩</p>
+					<br />
+					<p>看春风不喜</p>
+					<p>看夏蝉不烦</p>
+					<p>看秋叶不悲</p>
+					<p>看冬雪不叹</p>
+					<p>看富贵在身而不惊</p>
+					<p>看不公于吾笑面对</p>
+					<br />
+					<p>愿我们都有足够的运气和勇气</p>
+					<p>去遇见命里不同的风</p>
+					<br />
+					<p>愿我们的世界星光满载</p>
+					<br />
+					
+					<!-- TODO:网页python迁移后未测试 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;"  >~$ <a href="https://startpage.zhuanjie.ltd/python.html">python</a></span>
+					<br />
+					
+					<!-- 多出口ip查询 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;"  >~$ ip</span>
+					<br />
+					<iframe src="https://ip.skk.moe/simple" style="width: 100%; border: 0; overflow: hidden; height:250px"></iframe>
+					
+					<!-- 网页python测试 -->
+					<!--<py-repl>-->
+					<!--	print("HelloWord")-->
+					<!--</py-repl>-->
+					
+
+				</div>
+			</div>
+			<!-- 第二个终端 -->
+			<div class="cmd cmd2">
+				<!-- 三个按钮 -->
+				<div class="click">
+					<div class="red"></div>
+					<div class="yellow"></div>
+					<div class="green"></div>
+				</div>
+				<!-- 顶部标题 -->
+				<div class="title">
+					<span>链接 - bash</span>
+				</div>
+				<!-- 终端内文字 -->
+				<div class="cmdText">
+
+					<!-- 链接 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">ls</span>
+					<ul class="ul">
+						<li><a href="http://startpage.zhuanjie.ltd/">个人主页https://startpage.zhuanjie.ltd/</a></li>
+						<li><a href="http://blog.zhuanjie.ltd/">博客主页https://blog.zhuanjie.ltd/</a></li>
+						<li><a href="https://pan.zhuanjie.ltd/">网盘 https://pan.zhuanjie.ltd/</a></li>
+						<li><a href="https://airport.randallanjie.uk/">机场推荐 https://airport.randallanjie.uk/</a></li>
+						<li><a href="https://www.rainyun.com?ref=MjU2NjA=">云服务器推广，优惠码：MjU2NjA=</a></li>
+					</ul>
+					
+					<!-- 图片跳转 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">ls /picture</span>
+					<ul class="ul">
+						<li><a href="http://startpage.zhuanjie.ltd/api/bing.php">bing今日美图</a></li>
+						<li><a href="https://www.sony.net/united/clock/">Sony图片</a></li>
+						<li><a href="https://www.pexels.com/zh-cn/">素材库</a></li>
+						<li><a href="https://www.ianfisherart.com/">云</a></li>
+					</ul>
+					
+					<!-- 一些其他工具，存不存活的就不清楚了 -->
+					<span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">ls /tools</span>
+					<ul class="ul">
+						<li><a href="https://temp-mail.org/zh/">临时邮箱</a></li>
+						<li><a href="https://airportal.cn/">airportal</a></li>
+						<li><a href="https://www.epidemicsound.com/music/featured/">氛围音乐</a></li>
+						<li><a href="https://asoftmurmur.com/">白噪声</a></li>
+						<li><a href="https://if.caiyunai.com/">文章续写</a></li>
+						<li><a href="https://zh.wikihow.com/%E9%A6%96%E9%A1%B5">如何...</a></li>
+						<li><a href="https://www.67tool.com/">其他工具</a></li>
+					</ul>
+
+					<!-- 网站建议-已废弃（qq机器人切换了协议，我懒得适配了） -->
+					<!-- <span style="color: rgb(0, 190, 0);">root@RandallHome </span>
+					<span style="color: blue;">~$ </span>
+					<span style="color: rgb(39, 39, 39);">feedback</span>
+					<p>请输入您对网站的建议：<br>
+					<textarea name="backs" cols ="50" rows = "5" id="backs"></textarea>
+					<br>
+					<input type="submit" name="submit" value="提交" onclick="feedback()"/> -->
+				</div>
+				
+			</div>
+			
+		</div>
+		
+	</div>
+	
+
+	<!-- 页脚 -->
+	<div id="footer">
+		<!-- 之前服务器在雨云计算中心 -->
+	    <!--<p><a href="https://www.rainyun.com?ref=MjU2NjA=">本站由雨云提供计算服务</a></p>-->
+		<p>本站由 <a href="https://github.com/Zhuanjier">Github</a> 和 Cloud flare 提供计算服务</p>
+		<p>© 2023 <a href="http://startpage.zhuanjie.ltd/">转接</a> | <a href="https://beian.miit.gov.cn/">京ICP备2021028872号-1</a></p>
+	</div>
+	
+	
+	
+		<script>
+		! function() {	
+			//封装方法，压缩之后减少文件大小	
+			function get_attribute(node, attr, default_value) {	
+				return node.getAttribute(attr) || default_value;	
+			}	
+			//封装方法，压缩之后减少文件大小	
+			function get_by_tagname(name) {	
+				return document.getElementsByTagName(name);	
+			}	
+			//获取配置参数	
+			function get_config_option() {	
+				var scripts = get_by_tagname("script"),	
+					script_len = scripts.length,	
+					script = scripts[script_len - 1]; //当前加载的script	
+				return {	
+					l: script_len, //长度，用于生成id用	
+					z: get_attribute(script, "zIndex", -1), //z-index	
+					o: get_attribute(script, "opacity", 0.5), //opacity	
+					c: get_attribute(script, "color", "0,0,0"), //color	
+					n: get_attribute(script, "count", 99) //count	
+				};	
+			}	
+			//设置canvas的高宽	
+			function set_canvas_size() {	
+				canvas_width = the_canvas.width = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth,	 
+				canvas_height = the_canvas.height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;	
+			}	
+	
+			//绘制过程	
+			function draw_canvas() {	
+				context.clearRect(0, 0, canvas_width, canvas_height);	
+				//随机的线条和当前位置联合数组	
+				var all_array = [current_point].concat(random_lines);	
+				var e, i, d, x_dist, y_dist, dist; //临时节点	
+				//遍历处理每一个点	
+				random_lines.forEach(function(r) {	
+					r.x += r.xa,	 
+					r.y += r.ya, //移动	
+					r.xa *= r.x > canvas_width || r.x < 0 ? -1 : 1,	 
+					r.ya *= r.y > canvas_height || r.y < 0 ? -1 : 1, //碰到边界，反向反弹	
+					context.fillRect(r.x - 0.5, r.y - 0.5, 1, 1); //绘制一个宽高为1的点	
+					for (i = 0; i < all_array.length; i++) {	
+						e = all_array[i];	
+						//不是当前点	
+						if (r !== e && null !== e.x && null !== e.y) {	
+							x_dist = r.x - e.x, //x轴距离 l	
+							y_dist = r.y - e.y, //y轴距离 n	
+							dist = x_dist * x_dist + y_dist * y_dist; //总距离, m	
+							dist < e.max && (e === current_point && dist >= e.max / 2 && (r.x -= 0.03 * x_dist, r.y -= 0.03 * y_dist), //靠近的时候加速	
+							d = (e.max - dist) / e.max,	 
+							context.beginPath(),	 
+							context.lineWidth = d / 2,	 
+							context.strokeStyle = "rgba(" + config.c + "," + (d + 0.2) + ")",	 
+							context.moveTo(r.x, r.y),	 
+							context.lineTo(e.x, e.y),	 
+							context.stroke());	
+						}	
+					}	
+					all_array.splice(all_array.indexOf(r), 1);	
+	
+				}), frame_func(draw_canvas);	
+			}	
+			//创建画布，并添加到body中	
+			var the_canvas = document.createElement("canvas"), //画布	
+				config = get_config_option(), //配置	
+				canvas_id = "c_n" + config.l, //canvas id	
+				context = the_canvas.getContext("2d"), canvas_width, canvas_height,	 
+				frame_func = window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function(func) {	
+					window.setTimeout(func, 1000 / 45);	
+				}, random = Math.random,	 
+				current_point = {	
+					x: null, //当前鼠标x	
+					y: null, //当前鼠标y	
+					max: 2000	
+				};	
+			the_canvas.id = canvas_id;	
+			the_canvas.style.cssText = "position:fixed;top:0;left:0;z-index:" + config.z + ";opacity:" + config.o;	
+			get_by_tagname("body")[0].appendChild(the_canvas);	
+			//初始化画布大小	
+	
+			set_canvas_size(), window.onresize = set_canvas_size;	
+			//当时鼠标位置存储，离开的时候，释放当前位置信息	
+			window.onmousemove = function(e) {	
+				e = e || window.event, current_point.x = e.clientX, current_point.y = e.clientY;	
+			}, window.onmouseout = function() {	
+				current_point.x = null, current_point.y = null;	
+			};	
+			//随机生成config.n条线位置信息	
+			for (var random_lines = [], i = 0; config.n > i; i++) {	
+				var x = random() * canvas_width, //随机位置	
+					y = random() * canvas_height,	
+					xa = 2 * random() - 1, //随机运动方向	
+					ya = 2 * random() - 1;	
+				random_lines.push({	
+					x: x,	
+					y: y,	
+					xa: xa,	
+					ya: ya,	
+					max: 60000 //沾附距离	
+				});	
+			}	
+			//重绘
+			setTimeout(function() {	
+				draw_canvas();	
+			}, 100);	
+		}();	
+	</script>
+
+	<!-- 网页反馈部分js -->
+	<!-- <script language="javascript">
+	function feedback() //声明标识符
+	{
+	    var test = document.getElementById("backs").value;
+	    if(test == ""){
+	        alert("请输入反馈信息！");
+	    }else{
+    	    var url = "http://startpage.zhuanjie.ltd:5700/send_private_msg?user_id=2227535604&message=startpage网页反馈信息：\n"+test;
+    	    var xhr = new XMLHttpRequest();
+    		xhr.open('get', url);
+    		xhr.onreadystatechange = function () {
+    		    if (xhr.readyState === 4) {
+    		        document.getElementById("backs").value = "";
+    				alert("感谢您的反馈！");
+    		    }
+    		}
+    		xhr.send();
+	    }
+	}
+	</script> -->
+</body>
+
+</html>
