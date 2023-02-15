@@ -34,6 +34,27 @@ body {
   height: 450px;
 }
 
+.footer {
+  width: 100%;
+  color: white;
+  float: left;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 30px;
+  /* background-color: blue; */
+  display: block;
+}
+
+.footer a {
+  text-decoration: none;
+  color: white;
+}
+
+.footer a:hover {
+  color: rgb(0, 81, 255);
+}
+
 .imgBx {
   position: absolute;
   left: 50%;
@@ -157,23 +178,3 @@ body {
   background: #fff;
 }
 
-.footer {
-    width: 100%;
-    color: white;
-    float: left;
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    margin-bottom: 30px;
-    /* background-color: blue; */
-    display: block;
-}
-
-.footer a {
-    text-decoration: none;
-    color: white;
-}
-
-.footer a:hover {
-    color: rgb(0, 81, 255);
-}
