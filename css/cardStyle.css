@@ -157,7 +157,7 @@ body {
   background: #fff;
 }
 
-#footer {
+.footer {
     width: 100%;
     color: white;
     float: left;
@@ -166,13 +166,14 @@ body {
     bottom: 0;
     margin-bottom: 30px;
     /* background-color: blue; */
+    display: block;
 }
 
-#footer a {
+.footer a {
     text-decoration: none;
     color: white;
 }
 
-#footer a:hover {
+.footer a:hover {
     color: rgb(0, 81, 255);
 }
