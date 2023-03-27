@@ -11,11 +11,14 @@
     <script>
         !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"K0v8ea14fqQQSKI8",ck:"K0v8ea14fqQQSKI8",autoTrack:true,hashMode:true});
     </script>
+
     <style>
         .hidden {
             display: none;
         }
     </style>
+
+    <!-- 弹窗动画 -->
     <script>
         function showWebNotice() {
             var webNotice = document.querySelector('.web_notice');
@@ -33,7 +36,6 @@
                 webNotice.style.display = 'none';
             }, 1000);
         }
-    
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(showWebNotice, 10); // 延迟0.01秒显示弹窗，可根据需要调整
         });
@@ -72,7 +74,8 @@
 	</div>
 
     <!-- 弹窗代码开始 -->
-    <div class="web_notice hidden" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);z-index: 99999; opacity: 0;">
+    <!-- <div class="web_notice hidden"
+         style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);z-index: 99999; opacity: 0;">
         <div style="position: fixed;top: 50%;left: 50%;width: 550px;background: #FFF;transform: translate(-50%, -50%);border-radius: 40px;padding: 50px 40px;">
             <h3 style="font-weight: bold;text-align: center;font-size: 30px;">
                 网站公告
@@ -84,7 +87,7 @@
                 我知道了
             </a>            
         </div>
-    </div>
+    </div> -->
     <!-- 弹窗代码结束 -->
     
 
