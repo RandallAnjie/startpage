@@ -11,6 +11,33 @@
     <script>
         !function(p){"use strict";!function(t){var s=window,e=document,i=p,c="".concat("https:"===e.location.protocol?"https://":"http://","sdk.51.la/js-sdk-pro.min.js"),n=e.createElement("script"),r=e.getElementsByTagName("script")[0];n.type="text/javascript",n.setAttribute("charset","UTF-8"),n.async=!0,n.src=c,n.id="LA_COLLECT",i.d=n;var o=function(){s.LA.ids.push(i)};s.LA?s.LA.ids&&o():(s.LA=p,s.LA.ids=[],o()),r.parentNode.insertBefore(n,r)}()}({id:"K0v8ea14fqQQSKI8",ck:"K0v8ea14fqQQSKI8",autoTrack:true,hashMode:true});
     </script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function showWebNotice() {
+            var webNotice = document.querySelector('.web_notice');
+            webNotice.classList.remove('hidden');
+            setTimeout(function() {
+                webNotice.style.transition = 'opacity 1s';
+                webNotice.style.opacity = 1;
+            }, 50);
+        }
+        function hideWebNotice() {
+            var webNotice = document.querySelector('.web_notice');
+            webNotice.style.transition = 'opacity 1s';
+            webNotice.style.opacity = 0;
+            setTimeout(function() {
+                webNotice.style.display = 'none';
+            }, 1000);
+        }
+    
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(showWebNotice, 10); // 延迟0.01秒显示弹窗，可根据需要调整
+        });
+    </script>    
 </head>
 <body>
     <div class="card">
@@ -45,7 +72,7 @@
 	</div>
 
     <!-- 弹窗代码开始 -->
-    <div class="web_notice" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);z-index: 99999;">
+    <div class="web_notice hidden" style="position: fixed;top: 0;left: 0;width: 100%;height: 100%;background: rgba(0,0,0,0.3);z-index: 99999; opacity: 0;">
         <div style="position: fixed;top: 50%;left: 50%;width: 550px;background: #FFF;transform: translate(-50%, -50%);border-radius: 40px;padding: 50px 40px;">
             <h3 style="font-weight: bold;text-align: center;font-size: 30px;">
                 网站公告
@@ -53,9 +80,9 @@
             <div style="font-size: 16px;margin-top: 26px;line-height: 30px;color: #999;">
                 ChatGPT站点由于官方原因，暂时无法使用！
             </div>
-            <a style="display: block;background: #98a3ff;color: #FFF;text-align: center;font-weight: bold;font-size: 19px;line-height: 60px;margin: 0 auto;margin-top: 45px;border-radius: 32px;width: 80%;" onclick="javascript:document.querySelector('.web_notice').remove()">
+            <a style="display: block;background: #98a3ff;color: #FFF;text-align: center;font-weight: bold;font-size: 19px;line-height: 60px;margin: 0 auto;margin-top: 45px;border-radius: 32px;width: 80%;" onclick="hideWebNotice()">
                 我知道了
-            </a>
+            </a>            
         </div>
     </div>
     <!-- 弹窗代码结束 -->
