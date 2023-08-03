@@ -108,19 +108,6 @@ doms.audio.addEventListener('timeupdate', setOffset);
 
 setOffset();
 
-// 旋转角度
-var rotateVal = 0;
-
-/**
- * 旋转图片
- */
-function rotate () {
-  InterVal = setInterval(function () {
-      rotateVal += 7;
-      doms.status_pic.style.transform = 'rotate(' + rotateVal + 'deg)';
-      doms.status_pic.style.transition = '0.1s linear';
-  }, 100)
-}
 
 /**
  * 控制播放暂停
@@ -128,10 +115,8 @@ function rotate () {
 function control() {
 	if(doms.audio.paused) {
     doms.audio.play()
-    rotate()
   }else {
     doms.audio.pause()
-    clearInterval(InterVal)
   }
 }
 
