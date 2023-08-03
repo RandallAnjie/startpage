@@ -120,12 +120,14 @@ function control() {
     doms.status_pic.style.width = '100px';
     doms.discpointer_pic.style.height = '70px';
     doms.discpointer_pic.style.width = '80px';
+    doms.status_pic.style.animation = 'rotate 2s linear infinite';
   }else {
     doms.audio.pause()
     doms.status_pic.style.height = '80px';
     doms.status_pic.style.width = '80px';
     doms.discpointer_pic.style.height = '40px';
     doms.discpointer_pic.style.width = '50px';
+    doms.status_pic.style.animation = 'none';
   }
 }
 
