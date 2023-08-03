@@ -36,6 +36,7 @@ var doms = {
   ul: document.querySelector('.container ul'),
   container: document.querySelector('.container'),
   status_pic: document.getElementById('status_pic'),
+  discpointer_pic: document.getElementById('discpointer_pic'),
 };
 
 /**
@@ -115,8 +116,16 @@ setOffset();
 function control() {
 	if(doms.audio.paused) {
     doms.audio.play()
+    doms.status_pic.style.height = '100px';
+    doms.status_pic.style.width = '100px';
+    doms.discpointer_pic.style.height = '70px';
+    doms.discpointer_pic.style.width = '80px';
   }else {
     doms.audio.pause()
+    doms.status_pic.style.height = '80px';
+    doms.status_pic.style.width = '80px';
+    doms.discpointer_pic.style.height = '40px';
+    doms.discpointer_pic.style.width = '50px';
   }
 }
 
