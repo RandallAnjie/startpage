@@ -22,8 +22,6 @@ function parseLrc() {
 
 /**
  * 将一个时间字符串解析为数字（秒）
- * @param {String} timeStr 时间字符串
- * @returns
  */
 function parseTime(timeStr) {
   var parts = timeStr.split(':');
@@ -80,6 +78,7 @@ var containerHeight = doms.container.clientHeight;
 var liHeight = doms.ul.children[0].clientHeight;
 // 最大偏移量
 var maxOffset = containerHeight - doms.ul.clientHeight;
+
 /**
  * 设置 ul 元素的偏移量
  */
@@ -109,8 +108,12 @@ doms.audio.addEventListener('timeupdate', setOffset);
 
 setOffset();
 
-var rotateVal = 0;  // 旋转角度
+// 旋转角度
+var rotateVal = 0;
 
+/**
+ * 旋转图片
+ */
 function rotate () {
   InterVal = setInterval(function () {
       rotateVal += 7;
@@ -119,6 +122,9 @@ function rotate () {
   }, 100)
 }
 
+/**
+ * 控制播放暂停
+ */
 function control() {
 	if(doms.audio.paused) {
     doms.audio.play()
