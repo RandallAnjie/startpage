@@ -17,25 +17,94 @@ audio {
 .container {
   position: absolute;
   height: 80%;
+  margin-top: 10%;
   width: 100%;
   overflow: hidden;
   color: #666;
   text-align: center;
-  /* border: 2px solid #fff; */
 }
 .container ul {
-  /* border: 2px solid #fff; */
   transition: 0.6s;
   list-style: none;
 }
 .container li {
-  height: 30px;
-  /* border: 1px solid #fff; */
-  line-height: 30px;
-  transition: 0.2s;
+  height: 50px;
+  line-height: 50px;
+  /* 添加模糊效果*/
+  filter: blur(1px);
+  transition: 0.6s;
 }
 .container li.active {
   color: #fff;
-  /* font-size: ; */
-  transform: scale(1.2);
+  transform: scale(1.8);
+  filter: blur(0);
 }
+
+#songstatus{
+  width: 200px;
+  height: 80px;
+  position: fixed;
+  right: 0px;
+  top: 0px;
+  padding-top: 5px;
+  z-index: 1000;
+transition: 0.5s;
+}
+
+#status_pic{
+  width: 80px;
+  height: 80px;
+  position: fixed;
+  right: 50px;
+  top: 5px;
+  border-radius:100%;
+transition: 0.5s;
+  z-index: 1;
+}
+
+#discpointer_pic{
+  width: 50px;
+  height: 40px;
+  position: fixed;
+  right: 75px;
+  top: 5px;
+transition: 0.5s;
+  z-index: 1;
+}
+
+
+#songstatus:hover #status_pic{
+  width: 100px;
+  height: 100px;
+}
+#songstatus:hover #discpointer_pic{
+  width: 80px;
+  height: 70px;
+}
+#songstatus:hover #playStatus{
+display: block;
+}
+
+#songstatus:hover #songslist{
+width: 200px;
+opacity: 1;
+}
+
+#playStatus{
+width: 200px;
+height: 100px;
+right: 0px;
+bottom: 0px;
+position: fixed;
+display: none;
+}
+
+#songCover{
+  width: 150px;
+  height: 150px;
+  right: 25px;
+  bottom: 50px;
+  position: fixed;
+box-shadow: 5px 5px 5px 5px #E5DFD3;
+}
+

@@ -37,6 +37,7 @@ var doms = {
   audio: document.querySelector('audio'),
   ul: document.querySelector('.container ul'),
   container: document.querySelector('.container'),
+  status_pic: document.getElementById('status_pic'),
 };
 
 /**
@@ -107,3 +108,24 @@ function setOffset() {
 doms.audio.addEventListener('timeupdate', setOffset);
 
 setOffset();
+
+var rotateVal = 0;  // 旋转角度
+
+function rotate () {
+  InterVal = setInterval(function () {
+      rotateVal += 7;
+      doms.status_pic.style.transform = 'rotate(' + rotateVal + 'deg)';
+      doms.status_pic.style.transition = '0.1s linear';
+  }, 100)
+}
+
+function control() {
+	if(doms.audio.paused) {
+    doms.audio.play()
+    rotate()
+  }else {
+    doms.audio.pause()
+    clearInterval(InterVal)
+  }
+}
+
