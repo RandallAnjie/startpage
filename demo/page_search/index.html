@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        RSearch
+    </title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        html {
+            background-color: #222;
+            background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAAECAYAAACp8Z5+AAAAGklEQVQIW2NkYGD4D8SMQAwGcAY2AbBKDBUAVuYCBQPd34sAAAAASUVORK5CYII=);
+            background-repeat: repeat;
+        }
+
+        h1,
+        h2 {
+            font-size: 24px;
+        }
+
+        p {
+            margin: 10px 0 10px 0;
+            font-size: 16px;
+            line-height: 1.32;
+        }
+
+        a {
+            color: #7aa76d;
+            text-decoration: none;
+
+            -webkit-transition: 0.15s color ease;
+            -moz-transition: 0.15s color ease;
+            -ms-transition: 0.15s color ease;
+            -o-transition: 0.15s color ease;
+            transition: 0.15s color ease;
+        }
+
+        a:hover {
+            color: #91cd85;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        input:focus {
+            border-color: #7aa76d;
+        }
+
+        small {
+            display: block;
+            margin-top: 15px;
+            padding-top: 15px;
+            color: #333;
+            font-size: 0.85em;
+            border-top: 1px dashed #ccc;
+
+            -webkit-text-size-adjust: none;
+        }
+
+        button {
+            border: 0px;
+            padding: 8px 10px;
+            margin: 5px 0px;
+            border-radius: 1px;
+            outline: 0;
+
+            float: right;
+
+            cursor: pointer;
+            color: #fff;
+            background: #7aa76d;
+            font-size: 15px;
+
+            -webkit-transition: 0.15s background ease;
+            -moz-transition: 0.15s background ease;
+            -ms-transition: 0.15s background ease;
+            -o-transition: 0.15s background ease;
+            transition: 0.15s background ease;
+        }
+
+        button:hover {
+            background: #91cd85;
+        }
+
+        button:active {
+            background: #60895a;
+        }
+
+        button+button {
+            margin-left: 5px;
+        }
+
+        .sharing {
+            margin-top: 50px;
+        }
+
+        body {
+            background: #fff;
+
+            font-family: 'Lato', Helvetica, sans-serif;
+            font-size: 16px;
+            color: #222;
+        }
+
+        .avgrund-active body {
+            -webkit-transform: scale(0.9);
+            -moz-transform: scale(0.9);
+            -ms-transform: scale(0.9);
+            -o-transform: scale(0.9);
+            transform: scale(0.9);
+        }
+
+        .avgrund-cover {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            visibility: hidden;
+            opacity: 0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        .avgrund-active .avgrund-cover {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .avgrund-contents {
+            position: relative;
+            padding: 20px;
+            max-width: 80%;
+            height: 100%;
+            margin: auto;
+        }
+
+        .avgrund-active .avgrund-contents {
+            -webkit-filter: blur(2px);
+            -moz-filter: blur(2px);
+            -ms-filter: blur(2px);
+            -o-filter: blur(2px);
+            filter: blur(2px);
+        }
+
+        .no-blur.avgrund-active .avgrund-contents {
+            -webkit-filter: none;
+            -moz-filter: none;
+            -ms-filter: none;
+            -o-filter: none;
+            filter: none;
+        }
+
+        .avgrund-popup {
+            position: absolute;
+            width: 340px;
+            height: 130px;
+            left: 50%;
+            top: 50%;
+            margin: -130px 0 0 -190px;
+            visibility: hidden;
+            opacity: 0;
+            z-index: 2;
+            padding: 20px;
+
+            background: white;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.6);
+            border-radius: 3px;
+
+            -webkit-transform: scale(0.8);
+            -moz-transform: scale(0.8);
+            -ms-transform: scale(0.8);
+            -o-transform: scale(0.8);
+            transform: scale(0.8);
+        }
+
+        .avgrund-active .avgrund-popup {
+            visibility: visible;
+            opacity: 1;
+
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+        .avgrund-popup.stack {
+            -webkit-transform: scale(1.5);
+            -moz-transform: scale(1.5);
+            -ms-transform: scale(1.5);
+            -o-transform: scale(1.5);
+            transform: scale(1.5);
+        }
+
+        .avgrund-active .avgrund-popup.stack {
+            -webkit-transform: scale(1.1);
+            -moz-transform: scale(1.1);
+            -ms-transform: scale(1.1);
+            -o-transform: scale(1.1);
+            transform: scale(1.1);
+        }
+
+
+        .avgrund-ready body,
+        .avgrund-ready .avgrund-contents,
+        .avgrund-ready .avgrund-popup,
+        .avgrund-ready .avgrund-cover {
+            -webkit-transform-origin: 50% 50%;
+            -moz-transform-origin: 50% 50%;
+            -ms-transform-origin: 50% 50%;
+            -o-transform-origin: 50% 50%;
+            transform-origin: 50% 50%;
+
+            -webkit-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+            -moz-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+            -ms-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+            -o-transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+            transition: 0.3s all cubic-bezier(0.250, 0.460, 0.450, 0.940);
+        }
+
+        .avgrund-ready .avgrund-popup.no-transition {
+            -webkit-transition: none;
+            -moz-transition: none;
+            -ms-transition: none;
+            -o-transition: none;
+            transition: none;
+        }
+
+        #magnifier {
+            width: 40px;
+            height: 40px;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            cursor: pointer;
+            font-size: 40px;
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 50%;
+            line-height: 1;
+            vertical-align: middle;
+        }
+
+        #searchBox {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .highlight {
+            background-color: yellow;
+        }
+    </style>
+</head>
+
+<body>
+    <article class="avgrund-contents">
+        <div id="content">
+            这是一大段文字，你可以尝试使用放大镜按钮来搜索其中的任何内容。当你找到所需的内容后，它会被高亮显示。
+        </div>
+    </article>
+    <div id="magnifier">🔍</div>
+    <div class="avgrund-cover">
+    </div>
+    <aside class="avgrund-popup">
+        <input id="searchInput" placeholder="请输入搜索内容" type="text" />
+        <button onclick="avgrund.deactivate();">
+            搜索并关闭输入框
+        </button>
+    </aside>
+    <script>
+        const magnifier = document.getElementById("magnifier");
+        const searchInput = document.getElementById("searchInput");
+        const content = document.getElementById("content");
+        let isComposing = false;
+
+        magnifier.onclick = function () {
+            avgrund.activate("stack");
+            avgrund.disableBlur();  // 禁用模糊
+            setTimeout(function () {
+                searchInput.focus();
+            }, 300);
+        };
+
+        /**
+         * 清除高亮
+         * @Author: Anjie
+         * @Date:   2023-09-11
+         */
+        function clearHighlights() {
+            let highlighted = document.querySelectorAll(".highlight");
+            highlighted.forEach(element => {
+                element.outerHTML = element.innerHTML;
+            });
+        }
+
+        searchInput.addEventListener('keyup', function (e) {
+            if (e.key === "Enter") {
+                avgrund.deactivate();
+            }
+        });
+
+        searchInput.addEventListener('compositionstart', function () {
+            isComposing = true;
+        });
+
+        searchInput.addEventListener('compositionend', function () {
+            isComposing = false;
+            searchFunction();
+        });
+
+        searchInput.addEventListener('input', function () {
+            if (!isComposing) {
+                searchFunction();
+            }
+        });
+
+        /**
+         * 搜索功能
+         * @Author: Anjie
+         * @Date:   2023-09-11
+         */
+        function searchFunction() {
+            clearHighlights();
+            let searchText = searchInput.value;
+            if (searchText) {
+                let searchPattern = new RegExp("(" + searchText + ")", "gi");
+                content.innerHTML = content.innerHTML.replace(searchPattern, "<span class='highlight'>$1</span>");
+            }
+        }
+
+        (function () {
+
+            var container = document.documentElement,
+                popup = document.querySelector('.avgrund-popup'),
+                cover = document.querySelector('.avgrund-cover'),
+                currentState = null;
+
+            addClass(container, 'avgrund-ready');
+
+            /**
+             * 弹起键盘事件
+             * @Author: Anjie
+             * @Date:   2023-09-11
+             * @param event
+             */
+            function onDocumentKeyUp(event) {
+                if (event.keyCode === 27) {
+                    deactivate();
+                }
+            }
+
+            /**
+             * 点击事件
+             * @Author: Anjie
+             * @Date:   2023-09-11
+             * @param event
+             */
+            function onDocumentClick(event) {
+                if (event.target === cover) {
+                    deactivate();
+                }
+            }
+
+            /**
+             * 打开弹窗
+             * @Author: Anjie
+             * @Date:   2023-09-11
+             * @param state
+             */
+            function activate(state) {
+                document.addEventListener('keyup', onDocumentKeyUp, false);
+                document.addEventListener('click', onDocumentClick, false);
+
+                removeClass(popup, currentState);
+                addClass(popup, 'no-transition');
+                addClass(popup, state);
+
+                setTimeout(function () {
+                    removeClass(popup, 'no-transition');
+                    addClass(container, 'avgrund-active');
+                }, 0);
+
+                currentState = state;
+            }
+
+            /**
+             * 关闭弹窗
+             * @Author: Anjie
+             * @Date:   2023-09-11
+             */
+            function deactivate() {
+                document.removeEventListener('keyup', onDocumentKeyUp, false);
+                document.removeEventListener('click', onDocumentClick, false);
+
+                removeClass(container, 'avgrund-active');
+            }
+
+            /**
+             * 禁用模糊
+             * @Author: Anjie
+             * @Date:   2023-09-11
+             */
+            function disableBlur() {
+                addClass(document.documentElement, 'no-blur');
+            }
+
+            /**
+             * 添加类
+             * @Author: Anjie
+             * @Date:   2023-09-11
+             * @param element
+             * @param name
+             */
+            function addClass(element, name) {
+                element.className = element.className.replace(/\s+$/gi, '') + ' ' + name;
+            }
+
+            /**
+             * 移除类
+             * Author: Anjie
+             * @Date:   2023-09-11
+             * @param element
+             * @param name
+             */
+            function removeClass(element, name) {
+                element.className = element.className.replace(name, '');
+            }
+
+            /**
+             * 暴露接口
+             * activate: 打开弹窗
+             * deactivate: 关闭弹窗
+             * disableBlur: 禁用模糊
+             * @type {{activate: activate, disableBlur: disableBlur, deactivate: deactivate}}
+             */
+            window.avgrund = {
+                activate: activate,
+                deactivate: deactivate,
+                disableBlur: disableBlur
+            }
+        })();
+    </script>
+</body>
+
+</html>
