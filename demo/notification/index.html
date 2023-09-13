@@ -78,6 +78,7 @@
                 sessionStorage.setItem('popupText', JSON.stringify(popupText));
             }
             const popupLittle = document.createElement('div');
+            popupLittle.isRemoved = false;
             popupLittle.className = 'popup-little';
             popupLittle.textContent = text;
             popupLittle.style.cssText = `
@@ -126,7 +127,10 @@
                 const height = popupLittle.offsetHeight;
                 popupLittle.style.marginBottom = `-${height}px`;  // Anjie: 修复消失时的抖动
                 setTimeout(() => {
-                    popupContainer.removeChild(popupLittle);
+                    if (!popupLittle.isRemoved) {
+                        popupContainer.removeChild(popupLittle);
+                        popupLittle.isRemoved = true;
+                    }
                 }, 1000);
 
                 // 从sessionStorage中删除当前消息
@@ -144,7 +148,10 @@
                     const height = popupLittle.offsetHeight;
                     popupLittle.style.marginBottom = `-${height}px`;  // Anjie: 修复消失时的抖动
                     setTimeout(() => {
-                        popupContainer.removeChild(popupLittle);
+                        if (!popupLittle.isRemoved) {
+                            popupContainer.removeChild(popupLittle);
+                            popupLittle.isRemoved = true;
+                        }
                     }, 1000);
 
                     // 从sessionStorage中删除当前消息
