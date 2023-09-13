@@ -39,13 +39,13 @@
 
 
     </div>
-    <div id="version-info">V1.2 <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</a></div>
     <div class="popup-little-container" style="
 					position: fixed;
   					top: 20px;
   					right: 20px;
   					z-index: 9888;
 					"></div>
+    <div id="version-info">V1.2 <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</a></div>
     <script>
         // 最大保存弹窗数目
         let maxCount = 5;
@@ -89,7 +89,6 @@
                     popupText = [];
                 }
                 popupText.push(text);
-                console.log(maxCount);
                 if (popupText.length > maxCount) {
                     popupText.shift();
                 }
