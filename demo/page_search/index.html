@@ -275,6 +275,11 @@
             border-radius: 5px;
         }
 
+        #content {
+            overflow-y: auto;
+            max-height: 100%;
+        }
+        
         .highlight {
             background-color: yellow;
         }
@@ -372,6 +377,24 @@
             }
         });
 
+        /** 
+         * 转义HTML实体 
+         * @Author: Anjie
+         * @Date:   2023-09-12
+         * @param {string} text 要转义的文本
+         * @return {string} 转义后的文本
+         */
+        function escapeHtml(text) {
+            var map = {
+                '&': '&amp;',
+                '<': '&lt;',
+                '>': '&gt;',
+                '"': '&quot;',
+                "'": '&#039;'
+            };
+            return text.replace(/[&<>"']/g, function(m) { return map[m]; });
+        }
+
         /**
          * 搜索功能
          * @Author: Anjie
@@ -379,7 +402,7 @@
          */
         function searchFunction() {
             clearHighlights();
-            let searchText = searchInput.value;
+            let searchText = escapeHtml(searchInput.value);
             if (searchText) {
                 let searchPattern = new RegExp("(" + searchText + ")", "gi");
                 content.innerHTML = content.innerHTML.replace(searchPattern, "<span class='highlight'>$1</span>");
