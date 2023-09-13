@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        RNotification
+    </title>
+    <style>
+    </style>
+</head>
+
+<body>
+    <div>
+        <input id="msg" placeholder="请输入弹窗内容" type="text" /><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否在消息前加上日期 </label><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否存入session </label><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否在底部显示（默认顶部） </label><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否5秒后消失 </label><br />
+        <button onclick="sendMsg()">发送消息</button>
+
+
+    </div>
+    <div class="popup-little-container" style="
+					position: fixed;
+  					top: 20px;
+  					right: 20px;
+  					z-index: 9888;
+					"></div>
+    <script>
+        // 最大保存弹窗数目
+        let maxCount = 5;
+
+        /**
+         * 获取当前时间
+         * @Author:	Anjie
+         * @Date:	2023-08-17
+         */
+        function getNowTime() {
+            var now = new Date();
+            var year = now.getFullYear();
+            var month = now.getMonth();
+            var date = now.getDate();
+            var hour = now.getHours();
+            var minu = now.getMinutes();
+            var sec = now.getSeconds();
+            month = month + 1;
+            if (month < 10) month = "0" + month;
+            if (date < 10) date = "0" + date;
+            if (hour < 10) hour = "0" + hour;
+            if (minu < 10) minu = "0" + minu;
+            if (sec < 10) sec = "0" + sec;
+            return year + "/" + month + "/" + date + " " + hour + ":" + minu + ":" + sec;
+        }
+
+        /**
+         * 创建弹窗元素
+         * @Author:	Anjie
+         * @Date:	2023-08-17
+         * @param text
+         * @param save 是否保存到sessionStorage中，1保存，0不保存
+         * @returns {HTMLDivElement}
+         */
+        function createPopupElement(text, save = 1) {
+            if (save === 1) {
+                let popupText = sessionStorage.getItem('popupText');
+                if (popupText) {
+                    popupText = JSON.parse(popupText);
+                } else {
+                    popupText = [];
+                }
+                popupText.push(text);
+                console.log(maxCount);
+                if (popupText.length > maxCount) {
+                    popupText.shift();
+                }
+                sessionStorage.setItem('popupText', JSON.stringify(popupText));
+            }
+            const popupLittle = document.createElement('div');
+            popupLittle.className = 'popup-little';
+            popupLittle.textContent = text;
+            popupLittle.style.cssText = `
+					font-size: medium;
+					background-color: #fff;
+					box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+					border-radius: 4px;
+					padding: 10px;
+					width: 300px;
+					margin-bottom: 10px;
+					transition: opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear;
+					overflow: hidden;
+				`;
+            return popupLittle;
+        }
+
+        /**
+         * 显示弹窗
+         * 2023-09-04 fixed: 重复消息只显示一次
+         * @Author:	Anjie
+         * @Date:	2023-08-17
+         * @param message
+         * @param save 是否保存到sessionStorage中，1 保存 0 不保存
+         * @param position 在顶部显示还是在底部显示，up 顶部 down 底部
+         */
+        function showMessage(message, save, position = 'up', autoDisappearTime = 0) {
+            let popupText = sessionStorage.getItem('popupText');
+            if (popupText) {
+                popupText = JSON.parse(popupText);
+                if (popupText.indexOf(message) >= 0 && save == 1) {
+                    return;
+                }
+            }
+            const popupContainer = document.querySelector('.popup-little-container');
+            const popupLittle = createPopupElement(message, save);
+            if (position === 'up') {
+                popupContainer.prepend(popupLittle);
+            } else {
+                popupContainer.appendChild(popupLittle);
+            }
+            popupLittle.style.animation = 'fadeIn 1s';
+            popupLittle.style.opacity = "1";
+
+            popupLittle.addEventListener('click', () => {
+                popupLittle.style.opacity = 0;
+                const height = popupLittle.offsetHeight;
+                popupLittle.style.marginBottom = `-${height}px`;  // Anjie: 修复消失时的抖动
+                setTimeout(() => {
+                    popupContainer.removeChild(popupLittle);
+                }, 1000);
+
+                // 从sessionStorage中删除当前消息
+                let popupText = sessionStorage.getItem('popupText');
+                let tempMessage = popupLittle.textContent;
+                if (popupText) {
+                    popupText = JSON.parse(popupText);
+                    popupText = popupText.filter(item => item != tempMessage);
+                    sessionStorage.setItem('popupText', JSON.stringify(popupText));
+                }
+            });
+            if (autoDisappearTime > 0) {
+                setTimeout(() => {
+                    popupLittle.style.opacity = 0;
+                    const height = popupLittle.offsetHeight;
+                    popupLittle.style.marginBottom = `-${height}px`;  // Anjie: 修复消失时的抖动
+                    setTimeout(() => {
+                        popupContainer.removeChild(popupLittle);
+                    }, 1000);
+
+                    // 从sessionStorage中删除当前消息
+                    let popupText = sessionStorage.getItem('popupText');
+                    let tempMessage = popupLittle.textContent;
+                    if (popupText) {
+                        popupText = JSON.parse(popupText);
+                        popupText = popupText.filter(item => item != tempMessage);
+                        sessionStorage.setItem('popupText', JSON.stringify(popupText));
+                    }
+                }, autoDisappearTime);
+            }
+        }
+
+        // 页面加载时，显示sessionStorage中的消息
+        let popupText = sessionStorage.getItem('popupText');
+        if (popupText) {
+            popupText = JSON.parse(popupText);
+            popupText.forEach(item => {
+                showMessage(item, 0, 'up', 0);
+            })
+        }
+
+        /**
+         * 发送消息
+         * @Author:	Anjie
+         * @Date:	2023-08-17
+         */
+        function sendMsg() {
+            let msg = document.getElementById('msg').value;
+            let chackbox = document.getElementsByClassName('chackbox');
+            let save = 0;
+            let position = 'up';
+            let autoDisappearTime = 0;
+            for (let i = 0; i < chackbox.length; i++) {
+                if (chackbox[i].checked) {
+                    if (i == 0) {
+                        msg = getNowTime() + ' ' + msg;
+                    }
+                    if (i == 1) {
+                        save = 1;
+                    }
+                    if (i == 2) {
+                        position = 'down';
+                    }
+                    if (i == 3) {
+                        autoDisappearTime = 5000;
+                    }
+                }
+            }
+            showMessage(msg, save, position, autoDisappearTime);
+        }
+    </script>
+</body>
+
+</html>
