@@ -8,6 +8,23 @@
         RNotification
     </title>
     <style>
+        #version-info {
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: rgba(128, 128, 128, 0.7);
+            z-index: 9999;
+            transition: color 0.3s ease;
+            transition: color 0.3s ease;
+        }
+
+        #version-info:hover {
+            color: white;
+            background-color: rgba(128, 128, 128, 0.7);
+        }
     </style>
 </head>
 
@@ -22,6 +39,7 @@
 
 
     </div>
+    <div id="version-info">V1.2 <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</a></div>
     <div class="popup-little-container" style="
 					position: fixed;
   					top: 20px;
