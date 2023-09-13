@@ -12,18 +12,32 @@
             position: fixed;
             left: 10px;
             bottom: 10px;
-            padding: 5px 10px;
+            padding: 10px 10px;
             border-radius: 5px;
             font-size: 12px;
             color: rgba(128, 128, 128, 0.7);
             z-index: 9999;
-            transition: color 0.3s ease;
-            transition: color 0.3s ease;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            max-height: 20px;
         }
 
         #version-info:hover {
             color: white;
             background-color: rgba(128, 128, 128, 0.7);
+            max-height: 100%;
+        }
+
+        .update-details {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #version-info:hover .update-details {
+            opacity: 1;
+            max-height: 100%;
         }
     </style>
 </head>
@@ -45,7 +59,19 @@
   					right: 20px;
   					z-index: 9888;
 					"></div>
-    <div id="version-info">V1.2 <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</a></div>
+    <div id="version-info">
+        当前版本: V1.2
+        <div class="update-details">
+            更新日志:
+            <br />
+            ·V1.0 2023-08-17 创建模板
+            <br />
+            ·V1.1 2023-09-04 整合弹窗代码
+            <br />
+            ·V1.2 2023-09-12 解决重复删除弹窗错误，增加种类选择
+        </div>
+        <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
+    </div>
     <script>
         // 最大保存弹窗数目
         let maxCount = 5;
