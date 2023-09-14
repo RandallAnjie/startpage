@@ -365,7 +365,7 @@
         </button>
     </aside>
     <div id="version-info">
-        当前版本: V1.3
+        当前版本: V1.4
         <div class="update-details">
             更新日志:
             <br />
@@ -376,6 +376,8 @@
             ·V1.2 2023-09-11 添加版本信息
             <br />
             ·V1.3 2023-09-12 修复输入&然后删除出现的bug
+            <br />
+            ·V1.3 2023-09-14 改用DOM操作（而不是简单的字符串替换）进行高亮，<br />这样可以更好地控制高亮的过程并避免破坏HTML结构
         </div>
         <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
     </div>
@@ -435,7 +437,7 @@
          * @return {string} 转义后的文本
          */
         function escapeHtml(text) {
-            var map = {
+            const map = {
                 '&': '&amp;',
                 '<': '&lt;',
                 '>': '&gt;',
@@ -446,18 +448,59 @@
         }
 
         /**
-         * 搜索功能
+         * 处理待搜索文本功能
          * @Author: Anjie
          * @Date:   2023-09-11
          */
         function searchFunction() {
             clearHighlights();
-            let searchText = escapeHtml(searchInput.value);
+
+            let searchText = searchInput.value;
             if (searchText) {
-                let searchPattern = new RegExp("(" + searchText + ")", "gi");
-                content.innerHTML = content.innerHTML.replace(searchPattern, "<span class='highlight'>$1</span>");
+                highlightText(document.getElementById('content'), searchText);
             }
         }
+
+        /**
+         * 高亮文本
+         * @Author: Anjie
+         * @Date:   2023-09-14
+         */
+        function highlightText(node, searchText) {
+            if (node.nodeType === 3) { // Text node
+                const regex = new RegExp(escapeHtml(searchText), 'gi');
+                const matches = node.data.match(regex);
+
+                if (matches) {
+                    const fragment = document.createDocumentFragment();
+                    let lastIdx = 0;
+                    node.data.replace(regex, (match, idx) => {
+                        const text = node.data.substring(lastIdx, idx);
+                        if (text) {
+                            fragment.appendChild(document.createTextNode(text));
+                        }
+
+                        const highlighted = document.createElement('span');
+                        highlighted.className = 'highlight';
+                        highlighted.textContent = match;
+                        fragment.appendChild(highlighted);
+
+                        lastIdx = idx + match.length;
+                    });
+
+                    const remainingText = node.data.substr(lastIdx);
+                    if (remainingText) {
+                        fragment.appendChild(document.createTextNode(remainingText));
+                    }
+
+                    node.parentNode.replaceChild(fragment, node);
+                }
+            } else if (node.nodeType === 1 && node.childNodes && !/(script|style)/i.test(node.tagName)) {
+                // Element node
+                Array.from(node.childNodes).forEach(child => highlightText(child, searchText));
+            }
+        }
+
 
         (function () {
 
