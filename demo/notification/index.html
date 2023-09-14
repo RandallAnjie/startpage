@@ -8,6 +8,21 @@
         RNotification
     </title>
     <style>
+        a {
+            color: black;
+            text-decoration: none;
+
+            -webkit-transition: 0.15s color ease;
+            -moz-transition: 0.15s color ease;
+            -ms-transition: 0.15s color ease;
+            -o-transition: 0.15s color ease;
+            transition: 0.15s color ease;
+        }
+
+        a:hover {
+            color: #91cd85;
+        }
+
         #version-info {
             text-align: left;
             position: fixed;
@@ -82,7 +97,7 @@
                     max-width: 80%;
 					"></div>
     <div id="version-info">
-        当前版本: V1.5
+        当前版本: V1.6
         <div class="update-details">
             更新日志:
             <br />
@@ -97,8 +112,10 @@
             ·V1.4 2023-09-13 解决重复删除弹窗错误
             <br />
             ·V1.5 2023-09-14 解决上下弹窗动画问题
+            <br />
+            ·V1.6 2023-09-14 弹窗内容支持HTML文本
         </div>
-        <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
+        <div onclick="window.open('https://randallanjie.com/', '_blank');">Powered By Randall</div>
     </div>
     <script>
         // 最大保存弹窗数目
@@ -303,7 +320,7 @@
             }
             showMessage(msg, save, position, autoDisappearTime);
         }
-        showMessage(getNowTime() + '<br />Powered By Randall | @randallanjie.com ©<br />感谢使用～', 0, 'up', 5000);
+        showMessage(getNowTime() + '<br /><a href="https://randallanjie.com/">Powered By Randall | @randallanjie.com ©</a><br />感谢使用～', 0, 'up', 5000);
     </script>
 </body>
 
