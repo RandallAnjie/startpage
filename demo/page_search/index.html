@@ -278,6 +278,7 @@
         #content {
             overflow-y: auto;
             max-height: 100%;
+            scroll-behavior: smooth;
         }
 
         #version-info {
@@ -353,6 +354,17 @@
             勃，三尺微命，一介书生。无路请缨，等终军之弱冠；有怀投笔，慕宗悫之长风。舍簪笏于百龄，奉晨昏于万里。非谢家之宝树，接孟氏之芳邻。他日趋庭，叨陪鲤对；今兹捧袂，喜托龙门。杨意不逢，抚凌云而自惜；钟期既遇，奏流水以何惭？
             <br />
             呜乎！胜地不常，盛筵难再；兰亭已矣，梓泽丘墟。临别赠言，幸承恩于伟饯；登高作赋，是所望于群公。敢竭鄙怀，恭疏短引；一言均赋，四韵俱成。请洒潘江，各倾陆海云尔。
+            <br />
+            <br />
+            <h2>醉翁亭记</h2>
+            <br />
+            环滁皆山也。其西南诸峰，林壑尤美。望之蔚然而深秀者，琅琊也。山行六七里，渐闻水声潺潺而泻出于两峰之间者，酿泉也。峰回路转，有亭翼然临于泉上者，醉翁亭也。作亭者谁？山之僧智仙也。名之者谁？太守自谓也。太守与客来饮于此，饮少辄醉，而年又最高，故自号曰醉翁也。醉翁之意不在酒，在乎山水之间也。山水之乐，得之心而寓之酒也。
+            <br />
+            若夫日出而林霏开，云归而岩穴暝，晦明变化者，山间之朝暮也。野芳发而幽香，佳木秀而繁阴，风霜高洁，水落而石出者，山间之四时也。朝而往，暮而归，四时之景不同，而乐亦无穷也。
+            <br />
+            至于负者歌于途，行者休于树，前者呼，后者应，伛偻提携，往来而不绝者，滁人游也。临溪而渔，溪深而鱼肥。酿泉为酒，泉香而酒洌；山肴野蔌，杂然而前陈者，太守宴也。宴酣之乐，非丝非竹，射者中，弈者胜，觥筹交错，起坐而喧哗者，众宾欢也。苍颜白发，颓然乎其间者，太守醉也。
+            <br />
+            已而夕阳在山，人影散乱，太守归而宾客从也。树林阴翳，鸣声上下，游人去而禽鸟乐也。然而禽鸟知山林之乐，而不知人之乐；人知从太守游而乐，而不知太守之乐其乐也。醉能同其乐，醒能述以文者，太守也。太守谓谁？庐陵欧阳修也。
         </div>
     </article>
     <div id="magnifier">🔍</div>
@@ -365,7 +377,7 @@
         </button>
     </aside>
     <div id="version-info">
-        当前版本: V1.5
+        当前版本: V1.6
         <div class="update-details">
             更新日志:
             <br />
@@ -380,6 +392,8 @@
             ·V1.4 2023-09-14 改用DOM操作（而不是简单的字符串替换）进行高亮，<br />这样可以更好地控制高亮的过程并避免破坏HTML结构
             <br />
             ·V1.5 2023-09-12 特殊字符进行转义
+            <br />
+            ·V1.6 2023-09-12 更新滚动至高亮位置
         </div>
         <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
     </div>
@@ -468,7 +482,15 @@
 
             let searchText = searchInput.value;
             if (searchText) {
-                highlightText(document.getElementById('content'), searchText);
+                highlightText(content, searchText);
+                let firstHighlight = document.querySelector('.highlight');
+                if (firstHighlight) {
+                    const contentHeight = content.clientHeight;
+                    const highlightHeight = firstHighlight.clientHeight;
+                    const offsetToMiddle = (contentHeight - highlightHeight) / 2;
+
+                    content.scrollTop = firstHighlight.offsetTop - content.offsetTop - offsetToMiddle;
+                }
             }
         }
 
