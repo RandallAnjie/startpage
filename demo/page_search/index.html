@@ -365,7 +365,7 @@
         </button>
     </aside>
     <div id="version-info">
-        当前版本: V1.4
+        当前版本: V1.5
         <div class="update-details">
             更新日志:
             <br />
@@ -377,7 +377,9 @@
             <br />
             ·V1.3 2023-09-12 修复输入&然后删除出现的bug
             <br />
-            ·V1.3 2023-09-14 改用DOM操作（而不是简单的字符串替换）进行高亮，<br />这样可以更好地控制高亮的过程并避免破坏HTML结构
+            ·V1.4 2023-09-14 改用DOM操作（而不是简单的字符串替换）进行高亮，<br />这样可以更好地控制高亮的过程并避免破坏HTML结构
+            <br />
+            ·V1.5 2023-09-12 特殊字符进行转义
         </div>
         <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
     </div>
@@ -406,6 +408,15 @@
             highlighted.forEach(element => {
                 element.outerHTML = element.innerHTML;
             });
+        }
+
+        /**
+         * 转义正则表达式
+         * @Author: Anjie
+         * @Date:   2023-09-14
+         */
+        function escapeRegExp(string) {
+            return string.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $&表示整个匹配的字符串
         }
 
         searchInput.addEventListener('keyup', function (e) {
@@ -468,7 +479,7 @@
          */
         function highlightText(node, searchText) {
             if (node.nodeType === 3) { // Text node
-                const regex = new RegExp(escapeHtml(searchText), 'gi');
+                const regex = new RegExp(escapeHtml(escapeRegExp(searchText)), 'gi');
                 const matches = node.data.match(regex);
 
                 if (matches) {
