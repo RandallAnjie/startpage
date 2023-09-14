@@ -39,6 +39,26 @@
             opacity: 1;
             max-height: 100%;
         }
+
+        @keyframes flyInFromRight {
+            from {
+                transform: translateX(100%);
+            }
+
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes flyInFromTop {
+            from {
+                transform: translateX(100%) translateY(-100%);
+            }
+
+            to {
+                transform: translateX(0) translateY(0);
+            }
+        }
     </style>
 </head>
 
@@ -60,7 +80,7 @@
   					z-index: 9888;
 					"></div>
     <div id="version-info">
-        当前版本: V1.2
+        当前版本: V1.3
         <div class="update-details">
             更新日志:
             <br />
@@ -69,6 +89,8 @@
             ·V1.1 2023-09-04 整合弹窗代码
             <br />
             ·V1.2 2023-09-12 解决重复删除弹窗错误，增加种类选择
+            <br />
+            ·V1.3 2023-09-13 解决上下弹窗动画问题
         </div>
         <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
     </div>
@@ -124,6 +146,7 @@
             popupLittle.isRemoved = false;
             popupLittle.className = 'popup-little';
             popupLittle.textContent = text;
+            // const height = popupLittle.offsetHeight;
             popupLittle.style.cssText = `
 					font-size: medium;
 					background-color: #fff;
@@ -131,8 +154,9 @@
 					border-radius: 4px;
 					padding: 10px;
 					width: 300px;
-					margin-bottom: 10px;
-					transition: opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear;
+					margin-bottom: 0px;
+                    margin-top: 0px;
+					transition: opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 0.5s 0.5s linear;
 					overflow: hidden;
 				`;
             return popupLittle;
@@ -159,16 +183,40 @@
             const popupLittle = createPopupElement(message, save);
             if (position === 'up') {
                 popupContainer.prepend(popupLittle);
+                const rect = popupLittle.getBoundingClientRect();
+                const height = rect.height;
+                popupLittle.style.animation = 'flyInFromTop 1s forwards';
+                // 找到第二个元素，设置其margin-top
+                const secondElement = popupContainer.children[1];
+                if (secondElement) {
+                    // Temporarily disable the transition
+                    secondElement.style.transition = 'none';
+                    secondElement.style.marginTop = `-${height}px`;
+
+                    // Force a reflow to ensure the above changes are applied immediately
+                    void secondElement.offsetWidth;
+
+                    // Re-enable the transition and reset margin-top to start the transition
+                    secondElement.style.transition = 'opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 0.5s linear';
+                    setTimeout(() => {
+                        secondElement.style.marginTop = '0px';
+                    }, 0); // short delay to ensure the transition gets applied
+                }
+
             } else {
                 popupContainer.appendChild(popupLittle);
+                popupLittle.style.animation = 'flyInFromRight 1s forwards';
             }
-            popupLittle.style.animation = 'fadeIn 1s';
             popupLittle.style.opacity = "1";
-
+            const rect = popupLittle.getBoundingClientRect();
+            const height = rect.height;
+            popupLittle.style.marginBottom = `-${height}px`;
+            setTimeout(() => {
+                popupLittle.style.marginBottom = '10px';
+            }, 10);
             popupLittle.addEventListener('click', () => {
                 popupLittle.style.opacity = 0;
-                const height = popupLittle.offsetHeight;
-                popupLittle.style.marginBottom = `-${height}px`;  // Anjie: 修复消失时的抖动
+                popupLittle.style.marginBottom = `-${height}px`;
                 setTimeout(() => {
                     if (!popupLittle.isRemoved) {
                         popupContainer.removeChild(popupLittle);
@@ -188,8 +236,9 @@
             if (autoDisappearTime > 0) {
                 setTimeout(() => {
                     popupLittle.style.opacity = 0;
-                    const height = popupLittle.offsetHeight;
-                    popupLittle.style.marginBottom = `-${height}px`;  // Anjie: 修复消失时的抖动
+                    const rect = popupLittle.getBoundingClientRect();
+                    const height = rect.height;
+                    popupLittle.style.marginBottom = `-${height}px`;
                     setTimeout(() => {
                         if (!popupLittle.isRemoved) {
                             popupContainer.removeChild(popupLittle);
