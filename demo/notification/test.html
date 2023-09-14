@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>
+        RNotification
+    </title>
+    <style>
+        a {
+            color: black;
+            text-decoration: none;
+
+            -webkit-transition: 0.15s color ease;
+            -moz-transition: 0.15s color ease;
+            -ms-transition: 0.15s color ease;
+            -o-transition: 0.15s color ease;
+            transition: 0.15s color ease;
+        }
+
+        a:hover {
+            color: #91cd85;
+        }
+
+        #version-info {
+            text-align: left;
+            position: fixed;
+            left: 10px;
+            bottom: 10px;
+            padding: 10px 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            color: rgba(128, 128, 128, 0.7);
+            z-index: 9999;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            max-height: 20px;
+        }
+
+        #version-info:hover {
+            color: white;
+            background-color: rgba(128, 128, 128, 0.7);
+            max-height: 100%;
+        }
+
+        .update-details {
+            opacity: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        #version-info:hover .update-details {
+            opacity: 1;
+            max-height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <input id="msg" placeholder="请输入弹窗内容" type="text" /><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否在消息前加上日期 </label><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否存入session </label><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否在底部显示（默认顶部） </label><br />
+        <label><input type="checkbox" value="1" class="chackbox"> 是否5秒后消失 </label><br />
+        <button onclick="sendMsg()">发送消息</button>
+    </div>
+    <div id="version-info">
+        当前版本: V1.6
+        <div class="update-details">
+            更新日志:
+            <br />
+            ·V1.0 2023-08-04 创建模板
+            <br />
+            ·V1.1 2023-09-05 整合弹窗代码
+            <br />
+            ·V1.2 2023-09-07 添加上下两处弹窗选择
+            <br />
+            ·V1.3 2023-09-10 增加种类选择
+            <br />
+            ·V1.4 2023-09-13 解决重复删除弹窗错误
+            <br />
+            ·V1.5 2023-09-14 解决上下弹窗动画问题
+            <br />
+            ·V1.6 2023-09-14 弹窗内容支持HTML文本
+        </div>
+        <div onclick="window.open('https://randallanjie.com/', '_blank');">Powered By Randall</div>
+    </div>
+    <script src="https://randallanjie.com/js/r_notification.js"></script>
+    <script>
+        /**
+         * 发送消息
+         * @Author:	Anjie
+         * @Date:	2023-08-17
+         */
+        function sendMsg() {
+            let msg = document.getElementById('msg').value;
+            let chackbox = document.getElementsByClassName('chackbox');
+            let save = 0;
+            let position = 'up';
+            let autoDisappearTime = 0;
+            for (let i = 0; i < chackbox.length; i++) {
+                if (chackbox[i].checked) {
+                    if (i == 0) {
+                        msg = getNowTime() + ' ' + msg;
+                    }
+                    if (i == 1) {
+                        save = 1;
+                    }
+                    if (i == 2) {
+                        position = 'down';
+                    }
+                    if (i == 3) {
+                        autoDisappearTime = 5000;
+                    }
+                }
+            }
+            showMessage(msg, save, position, autoDisappearTime);
+        }
+        showMessage(getNowTime() + '<br /><a href="https://randallanjie.com/">Powered By Randall | randallanjie.com ©</a><br />感谢使用～', 0, 'up', 5000);
+    </script>
+</body>
+
+</html>
