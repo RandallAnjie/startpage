@@ -1,5 +1,25 @@
 
 document.addEventListener("DOMContentLoaded", function () {
+    var showMessageQueue = [];
+
+    function ShowMessage() {
+        var args = Array.prototype.slice.call(arguments);
+        if (document.readyState === "loading") {
+            // If the DOM hasn't loaded, queue the function call
+            showMessageQueue.push(args);
+        } else {
+            // If the DOM has loaded, call the showMessage function immediately
+            showMessageInJS.apply(null, args);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        // Once DOM is loaded, execute all the queued showMessage calls
+        for (var i = 0; i < showMessageQueue.length; i++) {
+            showMessageInJS.apply(null, showMessageQueue[i]);
+        }
+    });
+
     var div = document.createElement("div");
     div.className = "popup-little-container";
     div.style.position = "fixed";
@@ -105,7 +125,7 @@ document.addEventListener("DOMContentLoaded", function () {
      * @param save 是否保存到sessionStorage中，1 保存 0 不保存
      * @param position 在顶部显示还是在底部显示，up 顶部 down 底部
      */
-    function showMessage(message, save, position = 'up', autoDisappearTime = 0) {
+    function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) {
         let popupText = sessionStorage.getItem('popupText');
         if (popupText) {
             popupText = JSON.parse(popupText);
@@ -197,7 +217,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (popupText) {
         popupText = JSON.parse(popupText);
         popupText.forEach(item => {
-            showMessage(item, 0, 'up', 0);
+            showMessageInJS(item, 0, 'up', 0);
         })
     }
 
