@@ -1,26 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>RMusic - 双笙 - 马步谣</title>
-    <link rel="shortcut icon" href="./assets/icon/双笙 - 马步谣.ico" type="image/x-icon" />
-    <link rel="stylesheet" href="./css/index.css" />
-  </head>
-  <body>
-    <div class="background"></div>
-    <audio loop src="./assets/music/双笙 - 马步谣.mp3">您的浏览器暂时不支持播放音乐嗷~</audio>
-    <div class="container">
-      <ul class="lrc-list"></ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RMusic - 双笙 - 马步谣</title>
+  <link rel="shortcut icon" href="./assets/icon/双笙 - 马步谣.ico" type="image/x-icon" />
+  <link rel="stylesheet" href="./css/index.css" />
+</head>
+
+<body>
+  <div class="background"></div>
+  <audio loop src="./assets/music/双笙 - 马步谣.mp3">您的浏览器暂时不支持播放音乐嗷~</audio>
+  <div class="container">
+    <ul class="lrc-list"></ul>
+  </div>
+  <div id="songstatus">
+    <div id="songstatus_pic" onclick="control()">
+      <img src="./assets/img/music_disc.png" id="status_pic">
+      <img src="./assets/img/discpointer.png" id="discpointer_pic">
     </div>
-    <div id="songstatus">
-	    <div id="songstatus_pic" onclick="control()">
-	        <img src="./assets/img/music_disc.png" id="status_pic">
-	        <img src="./assets/img/discpointer.png" id="discpointer_pic">
-	    </div>
+  </div>
+  <div id="version-info">
+    当前版本: V1.4
+    <div class="update-details">
+      更新日志:
+      <br />
+      ·V1.0 2023-08-03 创建模板
+      <br />
+      ·V1.1 2023-08-03 更新样式
+      <br />
+      ·V1.2 2023-08-03 删除旋转唱片
+      <br />
+      ·V1.3 2023-08-03 解决旋转一直修改dom树问题
+      <br />
+      ·V1.4 2023-08-03 添加循环播放
     </div>
-    <script src="./js/data.js"></script>
-    <script src="./js/index.js"></script>
-  </body>
+    <div onclick="window.open('https://startpage.zhuanjie.ltd/', '_blank');">Powered By Randall</div>
+  </div>
+  <script src="./js/data.js"></script>
+  <script src="./js/index.js"></script>
+</body>
+
 </html>
