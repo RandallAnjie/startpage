@@ -23,6 +23,46 @@
             color: #91cd85;
         }
 
+        #msg {
+            width: 100%;
+            max-width: 500px;
+            padding: 10px;
+            margin: 5px 0;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        #msg:focus {
+            border-color: #7aa76d;
+        }
+
+        button {
+            border: 0px;
+            padding: 8px 10px;
+            margin: 5px 0px;
+            border-radius: 1px;
+            outline: 0;
+
+            cursor: pointer;
+            color: #fff;
+            background: #7aa76d;
+            font-size: 15px;
+
+            -webkit-transition: 0.15s background ease;
+            -moz-transition: 0.15s background ease;
+            -ms-transition: 0.15s background ease;
+            -o-transition: 0.15s background ease;
+            transition: 0.15s background ease;
+        }
+
+        button:hover {
+            background: #91cd85;
+        }
+
         #version-info {
             text-align: left;
             position: fixed;
@@ -55,47 +95,44 @@
             opacity: 1;
             max-height: 100%;
         }
-
-        @keyframes flyInFromRight {
-            from {
-                transform: translateX(100%);
-            }
-
-            to {
-                transform: translateX(0);
-            }
-        }
-
-        @keyframes flyInFromTop {
-            from {
-                transform: translateX(100%) translateY(-100%);
-            }
-
-            to {
-                transform: translateX(0) translateY(0);
-            }
-        }
     </style>
 </head>
 
 <body>
-    <div>
-        <input id="msg" placeholder="请输入弹窗内容" type="text" /><br />
-        <label><input type="checkbox" value="1" class="chackbox"> 是否在消息前加上日期 </label><br />
-        <label><input type="checkbox" value="1" class="chackbox"> 是否存入session </label><br />
-        <label><input type="checkbox" value="1" class="chackbox"> 是否在底部显示（默认顶部） </label><br />
-        <label><input type="checkbox" value="1" class="chackbox"> 是否5秒后消失 </label><br />
-        <button onclick="sendMsg()">发送消息</button>
-
-
+    <div style="">
+        <h2>RNotification</h2>
+        <div>
+            <input id="msg" placeholder="请输入弹窗内容" type="text" /><br />
+            <label><input type="checkbox" value="1" class="chackbox"> 是否在消息前加上日期 </label><br />
+            <label><input type="checkbox" value="1" class="chackbox"> 是否存入session </label><br />
+            <label><input type="checkbox" value="1" class="chackbox"> 是否在底部显示（默认顶部） </label><br />
+            <label><input type="checkbox" value="1" class="chackbox"> 是否5秒后消失 </label><br />
+            <button onclick="sendMsg()">发送弹窗</button>
+            <button onclick="howToUse()">使用说明 & 点我复制script代码</button>
+        </div>
     </div>
-    <div class="popup-little-container" style="
-					position: fixed;
-  					top: 20px;
-  					right: 20px;
-  					z-index: 9888;
-                    max-width: 80%;
-					"></div>
+    <br />
+    <br />
+    <div id="eg" style="display: none;">
+        <h3>使用示例</h3>
+        <h4>使用方法1</h4>
+        <div id="code">
+            <pre>
+// 引入js文件
+&lt;script src="https://randallanjie.com/js/notification.js"&gt;&lt;/script&gt;
+// 再在script中调用 showMessage() 方法即可
+showMessage('我是消息～', 0, 'up', 0);
+            </pre>
+        </div>
+        <h4>使用方法2</h4>
+        <del>鼠标右键点击选择查看网页源代码</del>
+        <h3>参数说明</h3>
+        showMessage(msg, save, position, autoDisappearTime)<br />
+        message 弹窗内容<br />
+        save 是否保存到sessionStorage中，1 保存，0 不保存<br />
+        position 在顶部显示还是在底部显示，up 顶部，down 底部<br />
+        autoDisappearTime 自动消失时间，0 不消失，其他 固定ms消失
+    </div>
     <div id="version-info">
         当前版本: V1.6
         <div class="update-details">
@@ -114,183 +151,13 @@
             ·V1.5 2023-09-14 解决上下弹窗动画问题
             <br />
             ·V1.6 2023-09-14 弹窗内容支持HTML文本
+            <br />
+            ·V1.7 2023-09-14 改用js文件引入
         </div>
         <div onclick="window.open('https://randallanjie.com/', '_blank');">Powered By Randall</div>
     </div>
+    <script src="https://randallanjie.com/js/notification.js"></script>
     <script>
-        // 最大保存弹窗数目
-        let maxCount = 5;
-
-        /**
-         * 获取当前时间
-         * @Author:	Anjie
-         * @Date:	2023-08-17
-         */
-        function getNowTime() {
-            var now = new Date();
-            var year = now.getFullYear();
-            var month = now.getMonth();
-            var date = now.getDate();
-            var hour = now.getHours();
-            var minu = now.getMinutes();
-            var sec = now.getSeconds();
-            month = month + 1;
-            if (month < 10) month = "0" + month;
-            if (date < 10) date = "0" + date;
-            if (hour < 10) hour = "0" + hour;
-            if (minu < 10) minu = "0" + minu;
-            if (sec < 10) sec = "0" + sec;
-            return year + "/" + month + "/" + date + " " + hour + ":" + minu + ":" + sec;
-        }
-
-        /**
-         * 创建弹窗元素
-         * @Author:	Anjie
-         * @Date:	2023-08-17
-         * @param text
-         * @param save 是否保存到sessionStorage中，1保存，0不保存
-         * @returns {HTMLDivElement}
-         */
-        function createPopupElement(text, save = 1) {
-            if (save === 1) {
-                let popupText = sessionStorage.getItem('popupText');
-                if (popupText) {
-                    popupText = JSON.parse(popupText);
-                } else {
-                    popupText = [];
-                }
-                popupText.push(text);
-                if (popupText.length > maxCount) {
-                    popupText.shift();
-                }
-                sessionStorage.setItem('popupText', JSON.stringify(popupText));
-            }
-            const popupLittle = document.createElement('div');
-            popupLittle.isRemoved = false;
-            popupLittle.className = 'popup-little';
-            popupLittle.innerHTML = text;
-            // const height = popupLittle.offsetHeight;
-            popupLittle.style.cssText = `
-					font-size: medium;
-					background-color: #fff;
-					box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-					border-radius: 4px;
-					padding: 10px;
-                    max-width: 340px;
-					min-width: 340px;
-					margin-bottom: 0px;
-                    margin-top: 0px;
-					transition: opacity 0.5s linear,width 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 0.5s 0.5s linear;
-					overflow: hidden;
-				`;
-            return popupLittle;
-        }
-
-        /**
-         * 显示弹窗
-         * 2023-09-04 fixed: 重复消息只显示一次
-         * @Author:	Anjie
-         * @Date:	2023-08-17
-         * @param message
-         * @param save 是否保存到sessionStorage中，1 保存 0 不保存
-         * @param position 在顶部显示还是在底部显示，up 顶部 down 底部
-         */
-        function showMessage(message, save, position = 'up', autoDisappearTime = 0) {
-            let popupText = sessionStorage.getItem('popupText');
-            if (popupText) {
-                popupText = JSON.parse(popupText);
-                if (popupText.indexOf(message) >= 0 && save == 1) {
-                    return;
-                }
-            }
-            const popupContainer = document.querySelector('.popup-little-container');
-            const popupLittle = createPopupElement(message, save);
-            if (position === 'up') {
-                popupContainer.prepend(popupLittle);
-                const rect = popupLittle.getBoundingClientRect();
-                const height = rect.height;
-                popupLittle.style.animation = 'flyInFromTop 1s forwards';
-                // 找到第二个元素，设置其margin-top
-                const secondElement = popupContainer.children[1];
-                if (secondElement) {
-                    // Temporarily disable the transition
-                    secondElement.style.transition = 'none';
-                    secondElement.style.marginTop = `-${height}px`;
-
-                    // Force a reflow to ensure the above changes are applied immediately
-                    void secondElement.offsetWidth;
-
-                    // Re-enable the transition and reset margin-top to start the transition
-                    secondElement.style.transition = 'opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 0.5s linear';
-                    setTimeout(() => {
-                        secondElement.style.marginTop = '0px';
-                    }, 0); // short delay to ensure the transition gets applied
-                }
-
-            } else {
-                popupContainer.appendChild(popupLittle);
-                popupLittle.style.animation = 'flyInFromRight 1s forwards';
-            }
-            popupLittle.style.opacity = "1";
-            const rect = popupLittle.getBoundingClientRect();
-            const height = rect.height;
-            popupLittle.style.marginBottom = `-${height}px`;
-            setTimeout(() => {
-                popupLittle.style.marginBottom = '10px';
-            }, 10);
-            popupLittle.addEventListener('click', () => {
-                popupLittle.style.opacity = 0;
-                popupLittle.style.marginBottom = `-${height}px`;
-                setTimeout(() => {
-                    if (!popupLittle.isRemoved) {
-                        popupContainer.removeChild(popupLittle);
-                        popupLittle.isRemoved = true;
-                    }
-                }, 1000);
-
-                // 从sessionStorage中删除当前消息
-                let popupText = sessionStorage.getItem('popupText');
-                let tempMessage = popupLittle.textContent;
-                if (popupText) {
-                    popupText = JSON.parse(popupText);
-                    popupText = popupText.filter(item => item != tempMessage);
-                    sessionStorage.setItem('popupText', JSON.stringify(popupText));
-                }
-            });
-            if (autoDisappearTime > 0) {
-                setTimeout(() => {
-                    popupLittle.style.opacity = 0;
-                    const rect = popupLittle.getBoundingClientRect();
-                    const height = rect.height;
-                    popupLittle.style.marginBottom = `-${height}px`;
-                    setTimeout(() => {
-                        if (!popupLittle.isRemoved) {
-                            popupContainer.removeChild(popupLittle);
-                            popupLittle.isRemoved = true;
-                        }
-                    }, 1000);
-
-                    // 从sessionStorage中删除当前消息
-                    let popupText = sessionStorage.getItem('popupText');
-                    let tempMessage = popupLittle.textContent;
-                    if (popupText) {
-                        popupText = JSON.parse(popupText);
-                        popupText = popupText.filter(item => item != tempMessage);
-                        sessionStorage.setItem('popupText', JSON.stringify(popupText));
-                    }
-                }, autoDisappearTime);
-            }
-        }
-
-        // 页面加载时，显示sessionStorage中的消息
-        let popupText = sessionStorage.getItem('popupText');
-        if (popupText) {
-            popupText = JSON.parse(popupText);
-            popupText.forEach(item => {
-                showMessage(item, 0, 'up', 0);
-            })
-        }
-
         /**
          * 发送消息
          * @Author:	Anjie
@@ -320,7 +187,26 @@
             }
             showMessage(msg, save, position, autoDisappearTime);
         }
-        showMessage(getNowTime() + '<br /><a href="https://randallanjie.com/">Powered By Randall | @randallanjie.com ©</a><br />感谢使用～', 0, 'up', 5000);
+        async function copyToClipboard(text) {
+            try {
+                await navigator.clipboard.writeText(text);
+                console.log('Text copied to clipboard');
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+            }
+        }
+        function howToUse() {
+            showMessage(`感谢使用RNotification<br />
+            使用方法间左侧<br />
+            showMessage(msg, save, position, autoDisappearTime)参数说明:<br />
+            message 弹窗内容<br />
+            save 是否保存到sessionStorage中，1 保存，0 不保存<br />
+            position 在顶部显示还是在底部显示，up 顶部，down 底部<br />
+            autoDisappearTime 自动消失时间，0 不消失，其他 固定ms消失`, 0, 'up', 0);
+            document.getElementById('eg').style.display = 'block';
+            copyToClipboard('\<script src="https://randallanjie.com/js/notification.js"\>\</script\>');
+        }
+        showMessage('欢迎来到 RNotification 使用说明，感谢您的使用～<br /><a href="https://randallanjie.com/">Powered By Randall | randallanjie.com ©</a>', 0, 'up', 0);
     </script>
 </body>
 
