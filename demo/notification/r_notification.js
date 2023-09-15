@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < showMessageQueue.length; i++) {
         showMessageInJS.apply(null, showMessageQueue[i]);
     }
-    console.info("您已经成功加载弹窗插件，当前版本：V1.7\n默认最大存储到session storage中的消息数目为5条\n详细使用方法及细节: https://randallanjie.com/demo/notification/ \nCopyright randallanjie.com © . All rights reserved.\nAuthor: Randall\nWebsite: https://randallanjie.com");
+    console.info("您已经成功加载弹窗插件\n当前版本：V1.7; 更新日期：2023-09-15\n默认最大存储到session storage中的消息数目为5条\n详细使用方法及细节: https://randallanjie.com/demo/notification/ \nCopyright randallanjie.com © . All rights reserved.\nAuthor: Randall\nWebsite: https://randallanjie.com");
 });
 
 
@@ -178,10 +178,14 @@ function createPopupElement(text, save = 1) {
  */
 function handleRemoval(popupElement, height) {
     const popupContainer = document.querySelector('.popup-little-container');
+    // const firstElement = popupContainer.children[0];
+    // if(firstElement === popupElement || firstElement.friend === popupElement) {
+    //     height+=10;
+    // }
     popupElement.style.opacity = 0;
-    popupElement.style.marginBottom = `-${height + 10}px`;
+    popupElement.style.marginBottom = `-${height+10}px`;
     popupElement.friend.style.opacity = 0;
-    popupElement.friend.style.marginBottom = `-${height + 10}px`;
+    popupElement.friend.style.marginBottom = `-${height+10}px`;
     setTimeout(() => {
         if (!popupElement.isRemoved && popupContainer.contains(popupElement)) {
             // 判断popupElement是在popupContainer中还是在body中
@@ -239,9 +243,9 @@ function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) 
             const rect = popupLittle.getBoundingClientRect();
             const height = rect.height;
             handleRemoval(popupLittle, height);
-            if (clone.parentElement) {
-                document.body.removeChild(clone);  // 同时删除复制的元素
-            }
+            // if (clone.parentElement) {
+            //     document.body.removeChild(clone);  // 同时删除复制的元素
+            // }
         });
         
         document.body.appendChild(clone);
@@ -297,9 +301,11 @@ function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) 
             void secondElement.offsetWidth;
 
             // Re-enable the transition and reset margin-top to start the transition
-            secondElement.style.transition = 'opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 0.5s linear, box-shadow 0.5s linear';
+            secondElement.style.transition = 'opacity 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 1s cubic-bezier(0, 0.5, 0.5, 1), box-shadow 0.5s linear';
+
             setTimeout(() => {
-                secondElement.style.marginTop = '0px';
+                // secondElement.style.marginTop = '0px';
+                secondElement.style.marginTop = '10px';
             }, 0); // short delay to ensure the transition gets applied
         }
         // 平滑滚动到顶部
