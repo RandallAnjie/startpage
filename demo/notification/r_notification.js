@@ -161,7 +161,7 @@ function createPopupElement(text, save = 1) {
                 margin-left: 10px;
                 margin-bottom: 0px;
                 margin-top: 10px;
-                transition: opacity 0.5s linear,width 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 0.5s 0.5s linear, box-shadow 0.5s linear;
+                transition: opacity 0.5s linear,width 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 1s cubic-bezier(0, 0.5, 0.5, 1), box-shadow 0.5s linear;
                 overflow: hidden;
                 position: absolute
                 z-index: 9988;
@@ -258,6 +258,9 @@ function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) 
             clone.style.left = `${rect.left-10}px`;
             clone.style.position = 'fixed';
             clone.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+            // 设置背景颜色为透明
+            clone.backgroundColor = 'transparent';
+            // clone.style.color = 'transparent';
             clone.style.zIndex = '9998';
 
             clone.friend = popupLittle;
