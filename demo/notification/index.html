@@ -134,7 +134,7 @@ showMessage('我是消息～', 0, 'up', 0);
         autoDisappearTime 自动消失时间，0 不消失，其他 固定ms消失
     </div>
     <div id="version-info">
-        当前版本: V1.6
+        当前版本: V1.7
         <div class="update-details">
             更新日志:
             <br />
@@ -150,14 +150,16 @@ showMessage('我是消息～', 0, 'up', 0);
             <br />
             ·V1.5 2023-09-14 解决上下弹窗动画问题
             <br />
-            ·V1.6 2023-09-14 弹窗内容支持HTML文本
+            ·V1.6 2023-09-14 弹窗内容支持HTML文本，改用js文件引入
             <br />
-            ·V1.7 2023-09-14 改用js文件引入
+            ·V1.7 2023-09-15 修复弹窗内容过长导致弹窗高度不够的问题
         </div>
         <div onclick="window.open('https://randallanjie.com/', '_blank');">Powered By Randall</div>
     </div>
+    <!-- 没错，就是下面的这一行 -->
     <script src="https://randallanjie.com/js/notification.js"></script>
     <script>
+        var show = 0;
         /**
          * 发送消息
          * @Author:	Anjie
@@ -196,15 +198,15 @@ showMessage('我是消息～', 0, 'up', 0);
             }
         }
         function howToUse() {
-            showMessage(`感谢使用RNotification<br />
-            使用方法间左侧<br />
-            showMessage(msg, save, position, autoDisappearTime)参数说明:<br />
-            message 弹窗内容<br />
-            save 是否保存到sessionStorage中，1 保存，0 不保存<br />
-            position 在顶部显示还是在底部显示，up 顶部，down 底部<br />
-            autoDisappearTime 自动消失时间，0 不消失，其他 固定ms消失`, 0, 'up', 0);
-            document.getElementById('eg').style.display = 'block';
+            if (show == 0) {
+                show = 1;
+                document.getElementById('eg').style.display = 'block';
+                showMessage(`感谢使用RNotification<br />
+                使用方法间左侧<br />
+                showMessage(msg, save, position, autoDisappearTime);`, 0, 'up', 0);
+            }
             copyToClipboard('\<script src="https://randallanjie.com/js/notification.js"\>\</script\>');
+            showMessage("复制代码成功～", 0, 'up', 2000);
         }
         showMessage('欢迎来到 RNotification 使用说明，感谢您的使用～<br /><a href="https://randallanjie.com/">Powered By Randall | randallanjie.com ©</a>', 0, 'up', 0);
     </script>
