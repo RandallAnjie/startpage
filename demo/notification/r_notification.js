@@ -1,19 +1,31 @@
 /* Copyright randallanjie.com © . All rights reserved.
  * Author: Randall  Website: https://randallanjie.com
  */
+
+if(typeof rPaddingTop == 'undefined'){
+    var rPaddingTop = 20;
+}
+if(typeof rPaddingRight == 'undefined'){
+    var rPaddingRight = 20;
+}
+
 document.addEventListener("DOMContentLoaded", function () {
     var div = document.createElement("div");
     div.className = "popup-little-container";
     div.style.position = "fixed";
-    div.style.top = "20px";
-    div.style.right = "20px";
+    div.style.top = "0";
+    div.style.right = "0";
+    div.style.paddingTop = `${rPaddingTop}px`;
+    div.style.paddingRight = `${rPaddingRight}px`;
     div.style.zIndex = "9888";
-    div.style.maxWidth = `calc(100vh - 2*${div.style.right})`;
+    // 设置最大宽度为100%减去2倍的padding
+    div.style.maxWidth = `calc(100vw - ${rPaddingRight * 2}px)`;
     div.style.width = "380px";
+    div.style.height = "100%";
     div.style.overflow = "auto";
     div.style.scrollBehavior = "smooth";
     // 设置 maxHeight 为 100% 屏幕高减去 top
-    div.style.maxHeight = `calc(100vh - ${div.style.top})`;
+    div.style.maxHeight = `calc(100vh - ${div.style.top} * 2)`;
     // 设置滚动条样式
     var style = document.createElement("style");
     style.innerHTML = `
@@ -25,6 +37,16 @@ document.addEventListener("DOMContentLoaded", function () {
             -ms-overflow-style: none; /* IE 和 Edge */
         }
     `;
+    // 设置div点击穿透，但是子元素不穿透
+    style.innerHTML += `
+        .popup-little-container {
+            pointer-events: none;
+        }
+        .popup-little-container * {
+            pointer-events: auto;
+        }
+    `;
+
     document.head.appendChild(style);
     // // 滚动条滑块
     // style = document.createElement("style");
@@ -98,31 +120,8 @@ document.addEventListener("DOMContentLoaded", function () {
     for (var i = 0; i < showMessageQueue.length; i++) {
         showMessageInJS.apply(null, showMessageQueue[i]);
     }
-    console.info("您已经成功加载弹窗插件\n当前版本：V1.7; 更新日期：2023-09-15\n默认最大存储到session storage中的消息数目为5条\n详细使用方法及细节: https://randallanjie.com/demo/notification/ \nCopyright randallanjie.com © . All rights reserved.\nAuthor: Randall\nWebsite: https://randallanjie.com");
+    console.info("您已经成功加载弹窗插件\n当前版本：V1.8; 更新日期：2023-09-17\n默认最大存储到session storage中的消息数目为5条\n详细使用方法及细节: https://randallanjie.com/demo/notification/ \nCopyright randallanjie.com © . All rights reserved.\nAuthor: Randall\nWebsite: https://randallanjie.com");
 });
-
-
-/**
- * 获取当前时间
- * @Author:	Anjie
- * @Date:	2023-08-17
- */
-function getNowTime() {
-    var now = new Date();
-    var year = now.getFullYear();
-    var month = now.getMonth();
-    var date = now.getDate();
-    var hour = now.getHours();
-    var minu = now.getMinutes();
-    var sec = now.getSeconds();
-    month = month + 1;
-    if (month < 10) month = "0" + month;
-    if (date < 10) date = "0" + date;
-    if (hour < 10) hour = "0" + hour;
-    if (minu < 10) minu = "0" + minu;
-    if (sec < 10) sec = "0" + sec;
-    return year + "/" + month + "/" + date + " " + hour + ":" + minu + ":" + sec;
-}
 
 /**
  * 创建弹窗元素
@@ -154,16 +153,16 @@ function createPopupElement(text, save = 1) {
     popupLittle.style.cssText = `
                 font-size: medium;
                 background-color: #fff;
-                /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
-                border-radius: 5px;
+                box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
                 padding: 10px;
-                width: 340px;
+                width: calc(100% - 40px);
                 margin-left: 10px;
                 margin-bottom: 0px;
                 margin-top: 10px;
                 transition: opacity 0.5s linear,width 0.5s linear, height 0.5s 0.5s linear, margin-bottom 0.5s 0.5s linear, margin-top 1s cubic-bezier(0, 0.5, 0.5, 1), box-shadow 0.5s linear;
                 overflow: hidden;
-                position: absolute
+                /* position: absolute */
                 z-index: 9988;
             `;
     return popupLittle;
@@ -184,22 +183,23 @@ function handleRemoval(popupElement, height) {
     // }
     popupElement.style.opacity = 0;
     popupElement.style.marginBottom = `-${height+10}px`;
-    popupElement.friend.style.opacity = 0;
-    popupElement.friend.style.marginBottom = `-${height+10}px`;
+    // popupElement.friend.style.opacity = 0;
+    // popupElement.friend.style.marginBottom = `-${height+10}px`;
     setTimeout(() => {
         if (!popupElement.isRemoved && popupContainer.contains(popupElement)) {
             // 判断popupElement是在popupContainer中还是在body中
-            if (popupElement.parentElement === popupContainer) {
-                popupContainer.removeChild(popupElement);
-                if (document.body.contains(popupElement.friend)) { // 确保friend是body的子元素
-                    document.body.removeChild(popupElement.friend);
-                }
-            } else if (document.body.contains(popupElement)) { // 确保popupElement是body的子元素
-                document.body.removeChild(popupElement);
-                popupContainer.removeChild(popupElement.friend);
-            }
+            // if (popupElement.parentElement === popupContainer) {
+            //     popupContainer.removeChild(popupElement);
+            //     if (document.body.contains(popupElement.friend)) { // 确保friend是body的子元素
+            //         document.body.removeChild(popupElement.friend);
+            //     }
+            // } else if (document.body.contains(popupElement)) { // 确保popupElement是body的子元素
+            //     document.body.removeChild(popupElement);
+            //     popupContainer.removeChild(popupElement.friend);
+            // }
+            popupContainer.removeChild(popupElement);
             popupElement.isRemoved = true;
-            popupElement.friend.isRemoved = true;
+            // popupElement.friend.isRemoved = true;
         }        
     }, 1000);
 
@@ -234,60 +234,61 @@ function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) 
     const popupContainer = document.querySelector('.popup-little-container');
     const popupLittle = createPopupElement(message, save);
 
-    const animateFlyIn = (element, animationName) => {
-        const clone = element.cloneNode(true);
+    // 绑定元素
+    // const animateFlyIn = (element, animationName) => {
+    //     const clone = element.cloneNode(true);
 
-        clone.addclass = 'test';
+    //     clone.addclass = 'test';
         
-        clone.addEventListener('click', () => {
-            const rect = popupLittle.getBoundingClientRect();
-            const height = rect.height;
-            handleRemoval(popupLittle, height);
-            // if (clone.parentElement) {
-            //     document.body.removeChild(clone);  // 同时删除复制的元素
-            // }
-        });
+    //     clone.addEventListener('click', () => {
+    //         const rect = popupLittle.getBoundingClientRect();
+    //         const height = rect.height;
+    //         handleRemoval(popupLittle, height);
+    //         // if (clone.parentElement) {
+    //         //     document.body.removeChild(clone);  // 同时删除复制的元素
+    //         // }
+    //     });
         
-        document.body.appendChild(clone);
+    //     document.body.appendChild(clone);
 
-        const animationDuration = 1000;  // 假设动画持续时间为1秒
+    //     const animationDuration = 1000;  // 假设动画持续时间为1秒
     
-        const updatePosition = () => {
-            const rect = element.getBoundingClientRect();
-            clone.style.top = `${rect.top-10}px`;
-            clone.style.left = `${rect.left-10}px`;
-            clone.style.position = 'fixed';
-            clone.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
-            // 设置背景颜色为透明
-            clone.backgroundColor = 'transparent';
-            // clone.style.color = 'transparent';
-            clone.style.zIndex = '9998';
+    //     const updatePosition = () => {
+    //         const rect = element.getBoundingClientRect();
+    //         clone.style.top = `${rect.top-10}px`;
+    //         clone.style.left = `${rect.left-10}px`;
+    //         clone.style.position = 'fixed';
+    //         clone.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+    //         // 设置背景颜色为透明
+    //         clone.backgroundColor = 'transparent';
+    //         // clone.style.color = 'transparent';
+    //         clone.style.zIndex = '8888';
 
-            clone.friend = popupLittle;
-            popupLittle.friend = clone;
+    //         clone.friend = popupLittle;
+    //         popupLittle.friend = clone;
 
-            clone.style.pointerEvents = 'none';
+    //         clone.style.pointerEvents = 'none';
 
     
-            if (clone.parentElement) {
-                requestAnimationFrame(updatePosition);
-            }
-        };
+    //         if (clone.parentElement) {
+    //             requestAnimationFrame(updatePosition);
+    //         }
+    //     };
     
-        requestAnimationFrame(updatePosition);
+    //     requestAnimationFrame(updatePosition);
     
-        // setTimeout(() => {
-        //     clone.style.boxShadow = 'none';
+    //     // setTimeout(() => {
+    //     //     clone.style.boxShadow = 'none';
             
-        //     setTimeout(() => {
-        //         document.body.removeChild(clone);
-        //     }, 5000);
-        // }, animationDuration);
-    };
+    //     //     setTimeout(() => {
+    //     //         document.body.removeChild(clone);
+    //     //     }, 5000);
+    //     // }, animationDuration);
+    // };
     
     if (position === 'up') {
         popupContainer.prepend(popupLittle);
-        animateFlyIn(popupLittle, 'flyInFromTop');
+        // animateFlyIn(popupLittle, 'flyInFromTop');
 
         popupContainer.prepend(popupLittle);
         const rect = popupLittle.getBoundingClientRect();
@@ -322,7 +323,7 @@ function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) 
         }, 10);
     } else if (position === 'down') {
         popupContainer.appendChild(popupLittle);
-        animateFlyIn(popupLittle, 'flyInFromRight');
+        // animateFlyIn(popupLittle, 'flyInFromRight');
 
         popupContainer.appendChild(popupLittle);
         popupLittle.style.animation = 'flyInFromRight 1s forwards';
@@ -340,10 +341,38 @@ function showMessageInJS(message, save, position = 'up', autoDisappearTime = 0) 
     //     popupLittle.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
     // }, 5000);
 
-    popupLittle.addEventListener('click', () => {
-        const rect = popupLittle.getBoundingClientRect();
-        const height = rect.height;
-        handleRemoval(popupLittle, height);
+    // popupLittle.addEventListener('click', () => {
+    //     const rect = popupLittle.getBoundingClientRect();
+    //     const height = rect.height;
+    //     handleRemoval(popupLittle, height);
+    // });
+
+    // 添加点击事件，判断点击的时候是否有是按下了alt键，如果是，等松开alt键后复制选中的文本
+    popupLittle.addEventListener('mousedown', (e) => {
+        if (e.altKey) {
+            // console.log(e.target.innerText);
+        }else {
+            const rect = popupLittle.getBoundingClientRect();
+            const height = rect.height;
+            handleRemoval(popupLittle, height);
+        }
+    });
+
+    popupLittle.addEventListener('mouseup', (e) => {
+        // 获取选中的文本
+        const selection = window.getSelection();
+        const text = selection.toString();
+        if (text) {
+            // console.log(text);
+            // 复制选中的文本
+            document.execCommand('copy');
+            showMessage("复制成功～", 0, 'up', 2000);
+        }
+        // 使得弹窗闪烁一下
+        popupLittle.style.boxShadow = '0 0 10px #91cd85';
+        setTimeout(() => {
+            popupLittle.style.boxShadow = '0 0 10px rgba(0, 0, 0, 0.1)';
+        }, 500);
     });
     
     if (autoDisappearTime > 0) {
