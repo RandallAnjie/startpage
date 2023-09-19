@@ -8,6 +8,26 @@
         RNotification
     </title>
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        h1,
+        h2,
+        h3 {
+            color: #333;
+        }
+
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            margin: 20px 0;
+        }
+
         a {
             color: black;
             text-decoration: none;
@@ -113,6 +133,9 @@
         </div>
     </div>
     <br />
+    项目已经上传到Github，<a href="https://github.com/RandallAnjie/RNotification">点我跳转到项目页</a>
+    <br />
+    项目说明页面已经独立出此主页，<a href="https://notification.randallanjie.com">点我跳转到说明页</a>
     <br />
     <div id="eg" style="display: none;">
         <h3>使用示例</h3>
@@ -143,6 +166,11 @@
         <h3>注意</h3>
         message 属性虽然支持传入 HTML 片段，但是在网站上动态渲染任意 HTML 是非常危险的，因为容易导致 XSS 攻击。 因此在 dangerouslyUseHTMLString 打开的情况下，请确保 message
         的内容是可信的，永远不要将用户提交的内容赋值给 message 属性。
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
     </div>
     <div id="version-info">
         当前版本: V1.8
@@ -250,9 +278,9 @@
             showMessage("复制代码成功～", 0, 'up', 2000);
         }
         showMessage('欢迎来到 RNotification 使用说明，感谢您的使用～<br /><a href="https://randallanjie.com/">Powered By Randall | randallanjie.com ©</a>', 0, 'up', 0);
-        showMessage('当前版本V1.8', 0, 'down', 0);
-        showMessage('<b>新功能鉴赏</b><br />1. 按住<pre>alt</pre>键，即可选中弹窗文字，松开后自动复制～<br />2. 在引入本script前设置<pre>var rPaddingTop = 20, rPaddingRight = 20;</pre>可以控制弹窗距离顶部和右侧的高度都为20px嗷～', 0, 'down', 0);
-        showMessage('<b>新版本预告</b><br />1. 加入HTML文本安全性判定', 0, 'down', 0);
+        showMessage('当前版本V1.8，如需新版本请选择GitHub仓库或者项目说明页跳转', 0, 'down', 0);
+        showMessage('项目已经上传到Github，<a href="https://github.com/RandallAnjie/RNotification">点我跳转到项目页</a>', 0, 'down', 0);
+        showMessage('项目说明页面已经独立出此主页，<a href="https://notification.randallanjie.com">点我跳转到说明页</a>', 0, 'down', 0);
     </script>
 </body>
 
