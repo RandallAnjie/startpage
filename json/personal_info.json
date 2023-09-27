@@ -1,0 +1,60 @@
+{
+    "webLink": [
+        {
+            "name": "个人主页",
+            "url": "https://startpage.zhuanjie.ltd/"
+        },
+        {
+            "name": "主服务器测速",
+            "url": "https://speedtest.randallanjie.com/"
+        },
+        {
+            "name": "博客",
+            "url": "https://blog.zhuanjie.ltd/"
+        },
+        {
+            "name": "Leetcode刷题记录",
+            "url": "https://note.randallanjie.com/pe/64f72299d079d400c5cf6596"
+        },
+        {
+            "name": "照片人脸修复（毕设）",
+            "url": "https://aimage.zhuanjie.ltd/"
+        },
+        {
+            "name": "个人机场",
+            "url": "https://airport.randallanjie.com/"
+        },
+        {
+            "name": "商店",
+            "url": "https://shop.randallanjie.com/"
+        },
+        {
+            "name": "个人流媒体站点",
+            "url": "https://stream.randallanjie.com/"
+        },
+        {
+            "name": "个人易支付",
+            "url": "https://pay.randallanjie.com/"
+        },
+        {
+            "name": "个人网盘1",
+            "url": "https://pan.zhuanjie.ltd/"
+        },
+        {
+            "name": "个人网盘2（私用）",
+            "url": "https://pan.randallanjie.com/"
+        },
+        {
+            "name": "若寒AI——ChatGPT",
+            "url": "https://rhchats.com/"
+        },
+        {
+            "name": "星火AI个人站",
+            "url": "https://ai.randallanjie.com/"
+        },
+        {
+            "name": "笔记",
+            "url": "https://note.randallanjie.com/"
+        }
+    ]
+}

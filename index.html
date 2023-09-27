@@ -19,7 +19,7 @@
     </style>
 
     <!-- 弹窗动画 -->
-    <script>
+    <!-- <script>
         function showWebNotice() {
             var webNotice = document.querySelector('.web_notice');
             webNotice.classList.remove('hidden');
@@ -39,39 +39,48 @@
         document.addEventListener('DOMContentLoaded', function() {
             setTimeout(showWebNotice, 10); // 延迟0.01秒显示弹窗，可根据需要调整
         });
-    </script>    
+    </script>     -->
 </head>
 <body>
-    <div class="card">
-        <div class="imgBx">
-            <img src="./img/headimg.png">
-        </div>
-        <div class="content">
-            <div class="details">
-                <h2>Randall<br><span>言多必失，谨言慎行</span></h2>
-                <div class="linkBtn">
-                    <button onclick="window.location.href = 'https://pan.zhuanjie.ltd/'">网盘</button>
-                    <button onclick="window.location.href = 'https://airport.randallanjie.uk/'">机场</button>
-                    <button onclick="window.location.href = 'https://ai.zhuanjie.ltd/'">ChatGPT</button>
+    <article class="avgrund-contents">
+        <div id="contains">
+            <div class="card">
+                <div class="imgBx">
+                    <img src="./img/headimg.png">
                 </div>
-                <div class="actionBtn">
-                    <!-- 实现button点击跳转的方式有两种，可以在button标签外套上a标签或者给button绑定onclick事件 -->
-                    <button onclick="window.location.href = 'https://blog.zhuanjie.ltd/'">个人博客</button>
-                    <button onclick="window.location.href = 'https://dash.randallanjie.uk/'">服务器监控</button>
+                <div class="content">
+                    <div class="details">
+                        <h2>Randall<br><span>言多必失，谨言慎行</span></h2>
+                        <div class="linkBtn">
+                            <button onclick="window.location.href = 'https://pan.zhuanjie.ltd/'">网盘</button>
+                            <button onclick="window.location.href = 'https://airport.randallanjie.com/'">机场</button>
+                            <button onclick="window.location.href = 'https://shop.randallanjie.com/'">商铺</button>
+                            <button onclick="window.location.href = 'https://dash.randallanjie.uk/'">监控</button>
+                        </div>
+                        <div class="actionBtn">
+                            <!-- 实现button点击跳转的方式有两种，可以在button标签外套上a标签或者给button绑定onclick事件 -->
+                            <button onclick="window.location.href = 'https://blog.zhuanjie.ltd/'">个人博客</button>
+                            <button id="magnifier">更多链接～</button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
 
-    <!-- 页脚 -->
-	<div class="footer">
-		<!-- 之前服务器在雨云计算中心 -->
-	    <!--<p><a href="https://www.rainyun.com?ref=MjU2NjA=">本站由雨云提供计算服务</a></p>-->
-		<p>本站由 <a href="https://github.com/Zhuanjier">Github</a> 和 Cloud flare 提供计算服务</p>
-		<p>© 2023 <a href="http://startpage.zhuanjie.ltd/">转接</a> | <a href="https://beian.miit.gov.cn/">京ICP备2021028872号-1</a></p>
-        <!-- 51la统计 -->
-        <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/K0v8ea14fqQQSKI8/quote.js?theme=#FFFFFF,#FFFFFF,#FFFFFF,#FFFFFF,#FFFFFF,#FFFFFF,12&f=12"></script>
-	</div>
+            <!-- 页脚 -->
+            <div class="footer">
+                <!-- 之前服务器在雨云计算中心 -->
+                <!--<p><a href="https://www.rainyun.com?ref=MjU2NjA=">本站由雨云提供计算服务</a></p>-->
+                <p>本站由 <a href="https://github.com/Zhuanjier">Github</a> 和 Cloud flare 提供计算服务</p>
+                <p>© 2023 <a href="http://startpage.zhuanjie.ltd/">转接</a> | <a href="https://beian.miit.gov.cn/">京ICP备2021028872号-1</a></p>
+                <!-- 51la统计 -->
+                <script id="LA-DATA-WIDGET" crossorigin="anonymous" charset="UTF-8" src="https://v6-widget.51.la/v6/K0v8ea14fqQQSKI8/quote.js?theme=#FFFFFF,#FFFFFF,#FFFFFF,#FFFFFF,#FFFFFF,#FFFFFF,12&f=12"></script>
+            </div>
+        </div>
+    </article>
+    <div class="avgrund-cover"></div>
+    <aside class="avgrund-popup">
+        请等待更多链接更新～
+    </aside>
 
     <!-- 弹窗代码开始 -->
     <!-- <div class="web_notice hidden"
@@ -89,8 +98,13 @@
         </div>
     </div> -->
     <!-- 弹窗代码结束 -->
-    
+    <script src="js/popup.js"></script>
+    <script src="https://notification.randallanjie.com/r_notification.js"></script>
 
+    <script>
+        rShowMessage('本弹窗来自本人开源项目：<a href="https://notification.randallanjie.com/" class="rnotificationLink">RNotification</a>，<a href="https://github.com/RandallAnjie/RNotification" class="rnotificationLink">点我去往仓库页面</a>', 0, 'up', 0)
+        rShowMessage('感谢您的访问～<br />目前服务器监控下线，图像处理服务器前端js文件异常，请等待修复', 0, 'up', 0)
+    </script>
 </body>
 
 </html>
