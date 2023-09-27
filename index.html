@@ -103,7 +103,26 @@
 
     <script>
         rShowMessage('本弹窗来自本人开源项目：<a href="https://notification.randallanjie.com/" class="rnotificationLink">RNotification</a>，<a href="https://github.com/RandallAnjie/RNotification" class="rnotificationLink">点我去往仓库页面</a>', 0, 'up', 0)
-        rShowMessage('感谢您的访问～<br />目前服务器监控下线，图像处理服务器前端js文件异常，请等待修复', 0, 'up', 0)
+        rShowMessage('感谢您的访问～<br />本站点目前只支持电脑端访问，手机端可能还有bug，感谢谅解<br />目前服务器监控下线，图像处理服务器前端js文件异常，请等待修复', 0, 'up', 0)
+
+
+        // 获取https://randallanjie.com/json/personal_info.json文件中的数据
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', 'json/personal_info.json', true);
+        xhr.send();
+        // 控制台输出json文件中的数据
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                var data = JSON.parse(xhr.responseText);
+                var webLink = data.webLink;
+                var webLinkHtml = '';
+                for (var i = 0; i < webLink.length; i++) {
+                    webLinkHtml += '<a href="' + webLink[i].url + '">' + webLink[i].name + '</a><br />';
+                }
+                document.querySelector('.avgrund-popup').innerHTML = webLinkHtml;
+            }
+        }
+
     </script>
 </body>
 

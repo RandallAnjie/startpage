@@ -253,9 +253,9 @@ html {
 .avgrund-popup {
   position: absolute;
   width: 340px;
-  height: 130px;
+  height: auto;
   left: 50%;
-  top: 50%;
+  top: 35%;
   margin: -130px 0 0 -190px;
   visibility: hidden;
   opacity: 0;
@@ -271,6 +271,16 @@ html {
   -ms-transform: scale(0.8);
   -o-transform: scale(0.8);
   transform: scale(0.8);
+}
+
+.avgrund-popup a {
+  color: black;
+  font-size: 1.2em;
+  text-decoration: none;
+}
+
+.avgrund-popup a:hover {
+  color: skyblue;
 }
 
 .avgrund-active .avgrund-popup {
