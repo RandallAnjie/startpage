@@ -38,5 +38,27 @@
       "position": "down",
       "autoDisappearTime": 0
     }
+  ],
+  "note": [
+    {
+      "msg": "感谢您的访问～",
+      "save": 0,
+      "position": "up",
+      "autoDisappearTime": 10000
+    }
+  ],
+  "shop": [
+    {
+      "msg": "感谢您的访问～",
+      "save": 0,
+      "position": "up",
+      "autoDisappearTime": 10000
+    },
+    {
+      "msg": "站点迁移后还未做任何测试设置，如有问题请联系：randall@randallanjie.com",
+      "save": 0,
+      "position": "down",
+      "autoDisappearTime": 10000
+    }
   ]
 }
