@@ -2,7 +2,7 @@
     "webLink": [
         {
             "name": "个人主页",
-            "url": "https://startpage.zhuanjie.ltd/"
+            "url": "https://randallanjie.com/"
         },
         {
             "name": "主服务器测速",
@@ -18,7 +18,8 @@
         },
         {
             "name": "照片人脸修复（毕设）",
-            "url": "https://aimage.zhuanjie.ltd/"
+            "url": "https://aimage.zhuanjie.ltd/",
+            "remark": "服务异常，等待修复"
         },
         {
             "name": "个人机场",
