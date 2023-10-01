@@ -69,7 +69,7 @@
       "autoDisappearTime": 10000
     },
     {
-      "msg": "站点迁移成功，部分影片还在自动整理中，<a href='https://shop.randallanjie.com/'>如需注册请点我前往转接小铺进行选购注册</a>，如有问题请联系：randall@randallanjie.com",
+      "msg": "站点迁移成功，部分影片还在自动整理中，<a href='https://shop.randallanjie.com/' style='color: white;'>如需注册请点我前往转接小铺进行选购注册</a>，如有问题请联系：randall@randallanjie.com",
       "save": 0,
       "position": "down",
       "autoDisappearTime": 0
