@@ -21,15 +21,15 @@
   ],
   "airport": [
     {
-      "msg": "网站成功迁移至新服务器，如有异常请联系randall@randallanjie.com",
+      "msg": "感谢您的访问～",
       "save": 0,
       "position": "up",
       "autoDisappearTime": 10000
     },
     {
-      "msg": "感谢您的访问～",
+      "msg": "网站成功迁移至新服务器，如有异常请联系randall@randallanjie.com",
       "save": 0,
-      "position": "up",
+      "position": "down",
       "autoDisappearTime": 10000
     },
     {
@@ -49,13 +49,13 @@
   ],
   "shop": [
     {
-      "msg": "感谢您的访问～",
+      "msg": "欢迎光临小铺，感谢您的访问～",
       "save": 0,
       "position": "up",
       "autoDisappearTime": 10000
     },
     {
-      "msg": "站点迁移后还未做任何测试设置，如有问题请联系：randall@randallanjie.com",
+      "msg": "如有问题请联系：randall@randallanjie.com",
       "save": 0,
       "position": "down",
       "autoDisappearTime": 10000
@@ -69,10 +69,10 @@
       "autoDisappearTime": 10000
     },
     {
-      "msg": "站点迁移后还未做任何测试设置，如有注册或者其他问题请联系：randall@randallanjie.com",
+      "msg": "站点迁移成功，部分影片还在自动整理中，<a href='https://shop.randallanjie.com/'>如需注册请点我前往转接小铺进行选购注册</a>，如有问题请联系：randall@randallanjie.com",
       "save": 0,
       "position": "down",
-      "autoDisappearTime": 10000
+      "autoDisappearTime": 0
     }
   ]
 }
