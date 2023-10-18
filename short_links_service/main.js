@@ -6,7 +6,7 @@ function shorturl() {
   }
 
   document.getElementById("addBtn").disabled = true;
-  document.getElementById("addBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>Please wait...';
+  document.getElementById("addBtn").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>请稍等...';
   fetch(window.location.pathname, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -17,7 +17,7 @@ function shorturl() {
     .then(function (myJson) {
       res = myJson;
       document.getElementById("addBtn").disabled = false;
-      document.getElementById("addBtn").innerHTML = 'Shorten it';
+      document.getElementById("addBtn").innerHTML = '生成';
 
       // 成功生成短链
       if (res.status == "200") {
@@ -36,7 +36,7 @@ function shorturl() {
       $('#resultModal').modal('show')
 
     }).catch(function (err) {
-      alert("Unknow error. Please retry!");
+      alert("未知错误，请重试!");
       console.log(err);
       document.getElementById("addBtn").disabled = false;
       document.getElementById("addBtn").innerHTML = 'Shorten it';
@@ -67,9 +67,7 @@ function copyurl(id, attr) {
     window.getSelection().addRange(range);
     document.execCommand('copy');
     window.getSelection().removeAllRanges();
-    console.log('Copy success')
   } catch (e) {
-    console.log('Copy error')
   }
 
   if (attr) {
@@ -160,7 +158,7 @@ function deleteShortUrl(delKeyPhrase) {
       $('#resultModal').modal('show')
 
     }).catch(function (err) {
-      alert("Unknow error. Please retry!");
+      alert("未知错误，请重试!");
       console.log(err);
     })
 }
