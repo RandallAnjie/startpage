@@ -77,7 +77,7 @@
   ],
   "emby2": [
     {
-      "msg": "<span style='color: black;'>感谢您的访问～</span><br /><span style='color: black;'>Powered By <a href="https://randallanjie.com">RandallAnjie.com</a></span>",
+      "msg": "<span style='color: black;'>感谢您的访问～</span><br /><span style='color: black;'>Powered By <a href='https://randallanjie.com/'>RandallAnjie.com</a></span>",
       "save": 0,
       "position": "up",
       "autoDisappearTime": 10000
