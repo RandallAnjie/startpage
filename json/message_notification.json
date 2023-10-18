@@ -81,6 +81,12 @@
       "save": 0,
       "position": "up",
       "autoDisappearTime": 10000
+    },
+    {
+      "msg": "<span style='color: black;'>本站点为Fat的GD团队盘资源列表，不提供在线观看服务，如有其他服务需要请联系<a href='https://t.me/randall_anjie' style='color: black;'>Telegram: @randall_anjie</a> 或者邮箱：randall@randallanjie.com<br /><a href='https://shorturls.win/mediaregisiter' style='color: black;'>如需注册用户，请点我去注册</a></span>",
+      "save": 0,
+      "position": "down",
+      "autoDisappearTime": 10000
     }
   ]
 }
