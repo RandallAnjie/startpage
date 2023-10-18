@@ -84,11 +84,9 @@ function loadUrlList() {
 
   // 文本框中的长链接
   let longUrl = document.querySelector("#longURL").value
-  console.log(longUrl)
 
   // 遍历localStorage
   let len = localStorage.length
-  console.log(+len)
   for (; len > 0; len--) {
     let keyShortURL = localStorage.key(len - 1)
     let valueLongURL = localStorage.getItem(keyShortURL)
