@@ -4,34 +4,34 @@
   <meta http-equiv="content-type" content="txt/html; charset=utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css" integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N" crossorigin="anonymous">
-  <title>Shorter URL</title>
+  <title>R短链服务</title>
   <link rel="stylesheet" href="https://crazypeace.github.io/Url-Shorten-Worker/styles.css">
 </head>
 <body>
   <div class="card">
-    <h5 class="card-header">Shorten your URLs!</h5>
+    <h5 class="card-header">R短链服务</h5>
     <div class="card-body">
       <h5 class="card-title"> </h5>
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon1">Long URL</span>
+          <span class="input-group-text" id="basic-addon1">长URL</span>
         </div>
-        <input type="text" class="form-control" id="longURL" aria-describedby="basic-addon1" placeholder="Example: https://example.com/" oninput="loadUrlList()">
+        <input type="text" class="form-control" id="longURL" aria-describedby="basic-addon1" placeholder="eg. https://randallanjie.com/balabala" oninput="loadUrlList()">
       </div>
 
       <div class="input-group mb-3">
         <div class="input-group-prepend">
-          <span class="input-group-text" id="basic-addon2">Custom Short URL</span>
+          <span class="input-group-text" id="basic-addon2">期望短链后缀</span>
         </div>
-        <input type="text" class="form-control" id="keyPhrase" aria-describedby="basic-addon2" placeholder="As you wish">
+        <input type="text" class="form-control" id="keyPhrase" aria-describedby="basic-addon2" placeholder="qwertyuiop">
       </div>     
 
       <div class="input-group mb-3">
-        <button class="btn btn-primary" type="button" onclick='shorturl()' id="addBtn">Shorten it</button>
+        <button class="btn btn-primary" type="button" onclick='shorturl()' id="addBtn">生成</button>
       </div>
 
-      <div class="input-group mb-3">
+      <div class="input-group mb-3" style="display: none">
         <div class="input-group-prepend">
           <span class="input-group-text" id="basic-addon3">password</span>
         </div>
