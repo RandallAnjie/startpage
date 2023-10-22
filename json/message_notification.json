@@ -87,6 +87,12 @@
       "save": 0,
       "position": "down",
       "autoDisappearTime": 0
-    }
+    },
+    {
+      "msg": "<span style='color: black;'>本站点只解析了更新盘、电影、国产、日韩、欧美、动漫、纪录片这几个盘，其余盘（例如补档）由于Fat没有刮削则暂不添加到此目录</span>",
+      "save": 0,
+      "position": "down",
+      "autoDisappearTime": 20000
+    },
   ]
 }
