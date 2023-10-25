@@ -94,5 +94,19 @@
       "position": "down",
       "autoDisappearTime": 20000
     }
+  ],
+  "dash": [
+    {
+      "msg": "欢迎光临，感谢您的访问～",
+      "save": 0,
+      "position": "up",
+      "autoDisappearTime": 10000
+    },
+    {
+      "msg": "如有问题请联系：randall@randallanjie.com",
+      "save": 0,
+      "position": "down",
+      "autoDisappearTime": 10000
+    }
   ]
 }
