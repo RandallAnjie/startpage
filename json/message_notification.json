@@ -33,7 +33,7 @@
       "autoDisappearTime": 10000
     },
     {
-      "msg": "<div><div><div style=\"display:flex;\"><span role=\"img\" aria-label=\"check-circle\" style=\"color:#1677ff;\"><svg focusable=\"false\" data-icon=\"check-circle\" width=\"2em\" height=\"2em\" fill=\"currentColor\" aria-hidden=\"true\" viewBox=\"64 64 896 896\"><path d=\"M512 64C264.6 64 64 264.6 64 512s200.6 448 448 448 448-200.6 448-448S759.4 64 512 64zm0 820c-205.4 0-372-166.6-372-372s166.6-372 372-372 372 166.6 372 372-166.6 372-372 372z\"></path><path d=\"M464 688a48 48 0 1096 0 48 48 0 10-96 0zm24-112h48c4.4 0 8-3.6 8-8V296c0-4.4-3.6-8-8-8h-48c-4.4 0-8 3.6-8 8v272c0 4.4 3.6 8 8 8z\"></path></svg></span><div style=\"padding-left:10px; padding-right:10px\"><div style=\"margin-top: 2px; margin-buttom: 5px; margin-left: 5px; margin-right: 5px; font-size: 20px;\">乔迁之喜</div><div style=\"margin-top: 5px; margin-left: 5px;\">由于站点成功迁移，国庆期间（10月1日至10日）下放一个<del>东京原生IP</del>香港节点（可解锁Netflix、Disney+、ChatGPT等）（东京机器宕机了，换一个香港的哈）至全部订阅组，此节点年付价格为600元，等10位年付无限流量用户下单后添加该节点至捐助组（邀请用户可返回10%佣金，即邀请的新用户付款60元，即可获得6元返现）<br />此消息需要您点击后消失～</div></div></div></div></div>",
+      "msg": "这段时间节点欠维护，稍后进行修复",
       "save": 0,
       "position": "down",
       "autoDisappearTime": 0
