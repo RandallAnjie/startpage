@@ -31,6 +31,6 @@ export CF_Email="$CF_Email"
 # 设置acme并申请证书
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-~/.acme.sh/acme.sh --issue -d "$DONAMEFRONT.randallanjie.uk" -d "$DONAMEFRONT-cdn.randallanjie.net" --dns dns_cf --dnssleep
+~/.acme.sh/acme.sh --issue -d "$DONAMEFRONT.randallanjie.net" -d "$DONAMEFRONT-cdn.randallanjie.net" --dns dns_cf --dnssleep
 
 echo "Setup complete for $DONAMEFRONT.randallanjie.uk and $DONAMEFRONT-cdn.randallanjie.net"
