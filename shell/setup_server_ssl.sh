@@ -20,9 +20,10 @@ sudo hostnamectl set-hostname "$DONAMEFRONT.randallanjie.net"
 # 运行acme脚本安装acme
 curl https://get.acme.sh | sh -s email="$DONAMEFRONT@randallanjie.net"
 
-# 添加环境变量到.acme.sh/acme.sh.env文件
-echo "export CF_Key=\"$CF_Key\"" >> ~/.acme.sh/acme.sh.env
-echo "export CF_Email=\"$CF_Email\"" >> ~/.acme.sh/acme.sh.env
+# 添加或更新环境变量到.acme.sh/acme.sh.env文件
+ENV_FILE="$HOME/.acme.sh/acme.sh.env"
+grep -q '^export CF_Key=' $ENV_FILE && sed -i "s/^export CF_Key=.*/export CF_Key=\"$CF_Key\"/" $ENV_FILE || echo "export CF_Key=\"$CF_Key\"" >> $ENV_FILE
+grep -q '^export CF_Email=' $ENV_FILE && sed -i "s/^export CF_Email=.*/export CF_Email=\"$CF_Email\"/" $ENV_FILE || echo "export CF_Email=\"$CF_Email\"" >> $ENV_FILE
 
 # 直接导出环境变量到当前会话
 export CF_Key="$CF_Key"
@@ -33,4 +34,4 @@ export CF_Email="$CF_Email"
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
 ~/.acme.sh/acme.sh --issue -d "$DONAMEFRONT.randallanjie.net" -d "$DONAMEFRONT-cdn.randallanjie.net" --dns dns_cf --dnssleep
 
-echo "Setup complete for $DONAMEFRONT.randallanjie.uk and $DONAMEFRONT-cdn.randallanjie.net"
+echo "Setup complete for $DONAMEFRONT.randallanjie.net and $DONAMEFRONT-cdn.randallanjie.net"
