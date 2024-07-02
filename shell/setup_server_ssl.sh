@@ -24,8 +24,9 @@ curl https://get.acme.sh | sh -s email="$DONAMEFRONT@randallanjie.net"
 echo "export CF_Key=\"$CF_Key\"" >> ~/.acme.sh/acme.sh.env
 echo "export CF_Email=\"$CF_Email\"" >> ~/.acme.sh/acme.sh.env
 
-# 刷新环境变量
-source ~/.profile
+# 直接导出环境变量到当前会话
+export CF_Key="$CF_Key"
+export CF_Email="$CF_Email"
 
 # 设置acme并申请证书
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
