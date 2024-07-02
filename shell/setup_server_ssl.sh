@@ -15,10 +15,10 @@ CF_Email="$3"
 sudo apt update && sudo apt upgrade -y && sudo apt install vim wget curl net-tools socat -y
 
 # 设置主机名
-sudo hostnamectl set-hostname "$DONAMEFRONT.randallanjie.net"
+sudo hostnamectl set-hostname "$DONAMEFRONT.randallanjie.uk"
 
 # 运行acme脚本安装acme
-curl https://get.acme.sh | sh -s email="$DONAMEFRONT@randallanjie.net"
+curl https://get.acme.sh | sh -s email="$DONAMEFRONT@randallanjie.uk"
 
 # 添加环境变量到.acme.sh/acme.sh.env文件
 echo "export CF_Key=\"$CF_Key\"" >> ~/.acme.sh/acme.sh.env
@@ -31,6 +31,6 @@ export CF_Email="$CF_Email"
 # 设置acme并申请证书
 ~/.acme.sh/acme.sh --upgrade --auto-upgrade
 ~/.acme.sh/acme.sh --set-default-ca --server letsencrypt
-~/.acme.sh/acme.sh --issue -d "$DONAMEFRONT.randallanjie.net" -d "$DONAMEFRONT-cdn.randallanjie.net" --dns dns_cf
+~/.acme.sh/acme.sh --issue -d "$DONAMEFRONT.randallanjie.uk" -d "$DONAMEFRONT-cdn.randallanjie.uk" --dns dns_cf
 
-echo "Setup complete for $DONAMEFRONT.randallanjie.net and $DONAMEFRONT-cdn.randallanjie.net"
+echo "Setup complete for $DONAMEFRONT.randallanjie.uk and $DONAMEFRONT-cdn.randallanjie.uk"
